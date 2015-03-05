@@ -1,0 +1,14 @@
+<h1>Programs</h1>
+{% for program in object_list %}
+<h2>{{ program.name }}</h2>
+<p>{{ program.comment }}</p>
+
+<ul>{{ programm.cells.all }}
+    {% for cell in program.cells.all %}
+    <li>{{ cell }}</li>
+    {% endfor %}
+</ul>
+
+{% empty %}
+<p>No events</p>
+{% endfor %}
