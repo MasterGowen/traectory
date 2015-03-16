@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -13,7 +14,7 @@
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css">
 		<link rel="stylesheet" type="text/css" href="js/masha/css/masha.css">
-		<link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
 		
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>		
@@ -124,6 +125,7 @@
             </div>
 <div class="section content">
    <div class="row">
+   {% block content %} <p>Ой, эта страничка пуста!</p>{% endblock %}
       <div class="col2 lea_alex">
                   <header>
                     <h1 class="title">
