@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Traectory, Cell, Program
+from .models import Trajectory, Cell, Program
 
 
-class TraectoryAdmin(admin.ModelAdmin):
+class TrajectoryAdmin(admin.ModelAdmin):
     pass
 
 
@@ -14,6 +14,6 @@ class ProgramAdmin(admin.ModelAdmin):
 class CellAdmin(admin.ModelAdmin):
     filter_horizontal = ('events',)
 
-admin.site.register(Traectory, TraectoryAdmin)
+admin.site.register(Trajectory, TrajectoryAdmin)
 admin.site.register(Cell, CellAdmin)
 admin.site.register(Program, ProgramAdmin)

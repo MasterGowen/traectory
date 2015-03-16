@@ -1,5 +1,5 @@
 """
-Django settings for traectory project.
+Django settings for trajectory project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -39,9 +39,9 @@ INSTALLED_APPS = (
 )
 
 INSTALLED_APPS += (
-    'traectory.user',
-    'traectory.event',
-    'traectory.traectory',
+    'trajectory.user',
+    'trajectory.event',
+    'trajectory.trajectory',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,9 +56,9 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),)
 LOGIN_URL = '/admin/login/'
-ROOT_URLCONF = 'traectory.urls'
+ROOT_URLCONF = 'trajectory.urls'
 
-WSGI_APPLICATION = 'traectory.wsgi.application'
+WSGI_APPLICATION = 'trajectory.wsgi.application'
 
 
 # Database

@@ -12,14 +12,14 @@ def key():
     return key
 
 
-class Traectory(models.Model):
+class Trajectory(models.Model):
     id = models.CharField(max_length=32, primary_key=True, default='None')
     comment = models.CharField(max_length=2048, blank=True, null=True)
 
     def save(self):
         if self.id == 'None':
             self.id = key()
-        super(Traectory, self).save()
+        super(Trajectory, self).save()
 
 
 class Cell(models.Model):

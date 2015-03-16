@@ -3,13 +3,13 @@ from django.contrib import admin
 
 from django.contrib.auth.decorators import login_required
 
-from .user.views import UserListView, UserCreate
+from .user.views import UserListView, new_user
 from .event.views import EventListView
-from .traectory.views import ProgramListView
+from .trajectory.views import ProgramListView
 
 urlpatterns = patterns('',
     url(r'^users/$', login_required(UserListView.as_view()), name='users'),
-    url(r'^$', UserCreate.as_view(), name='create_user'),
+    url(r'^$', new_user, name='create_user'),
 
     url(r'^events/$', EventListView.as_view(), name='create_user'),
     url(r'^programs/$', ProgramListView.as_view(), name='programs_list'),
