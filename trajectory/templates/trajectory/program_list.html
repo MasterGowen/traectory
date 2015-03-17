@@ -32,13 +32,16 @@
 {% for program in object_list %}
 <h2>{{ program.name }}</h2>
 <p>{{ program.comment }}</p>
-<form action="">
+<form action="" method="post">
+{% csrf_token %}
 {{ programm.cells.all }}
 
     {% for cell in program.cells.all %}
     <hr /><hr />
+    <div class="col event">
+    <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked><label for="{{ cell.id }}"><p>Не пойду</p></label></div>
       {% for event in cell.events.all %}
-        <div class="col event">
+       <div class="col event"> 
         <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}"><label for="{{ event.id }}"><p>{{ event.name }}<br />
          {{ event.comment }}</p>
          {% localtime on %}

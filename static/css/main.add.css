@@ -1,3 +1,4 @@
 .event input[type="radio"] {display:none;}
-.event label p{background: gray}
-.event input:checked +label p{background: gold}
+.event label{display: block; border: 0px solid gray; border-radius: 4px;height: 124px;cursor: pointer}
+.event label {background: gray}
+.event input:checked +label {background: gold}
