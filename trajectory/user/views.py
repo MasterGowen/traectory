@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest
 from django.core.context_processors import csrf
 from django.utils import timezone
 from django.views.generic.list import ListView
@@ -45,8 +44,7 @@ def new_user(request):
                 send_mail('НОТВ 2015', 'Ваша уникальная ссылка:'+link, 'admin@openedu.urfu.ru', [user.email])
             except:
                 pass
-
-            return redirect(link)  # render(request, 'trajectory/new.html', {"user": user.id, "trajectory": trajectory.id, "link": link})
+            return redirect(link)
     args = {}
     args.update(csrf(request))
     args['form'] = UserForm()
