@@ -1,6 +1,14 @@
 from django.db import models
+import hashlib
+from os import urandom
 
 from ..trajectory.models import Trajectory
+
+
+def key():
+
+    key = hashlib.md5(urandom(128)).hexdigest()
+    return key
 
 
 class User(models.Model):
@@ -24,3 +32,8 @@ class User(models.Model):
 
     class Meta:
         unique_together = ("email", "f")
+
+    def save(self):
+        if self.id == 'None':
+            self.id = key()
+        super(User, self).save()
