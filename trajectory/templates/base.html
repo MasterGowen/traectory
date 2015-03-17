@@ -39,8 +39,9 @@
                                 </div>
                             </div>
                             <div class="user-links">
-                                <a href="#" class="header-login button">Войти</a>
-                                <a href="#">Регистрация</a>
+                                {% if user.f %}
+                                <p>{{user.f }} {{user.i }} {{user.o }}</p>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="header-content">
