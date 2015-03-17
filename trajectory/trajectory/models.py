@@ -24,14 +24,21 @@ class Trajectory(models.Model):
 
 
 class Cell(models.Model):
+    id = models.CharField(max_length=32, primary_key=True, default='None')
     name = models.CharField('Название', max_length=1024, default='Ячейка')
     events = models.ManyToManyField(Event)
 
     def __str__(self):
         return self.name
 
+    def save(self):
+        if self.id == 'None':
+            self.id = key()
+        super(Cell, self).save()
+
 
 class Program(models.Model):
+    id = models.CharField(max_length=32, primary_key=True, default='None')
     name = models.CharField('Название', max_length=1024, blank=True, null=True)
     comment = models.TextField('Описание', max_length=4096, blank=True, null=True)
     payd = models.BooleanField('Платно', default=False)
@@ -39,3 +46,8 @@ class Program(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self):
+        if self.id == 'None':
+            self.id = key()
+        super(Program, self).save()

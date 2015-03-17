@@ -43,7 +43,7 @@ def new_user(request):
             user.save()
             #send_mail('NOTV2015', link, 'admin@openedu.urfu.ru', [user.email])
 
-            return redirect(link)# render(request, 'trajectory/new.html', {"user": user.id, "trajectory": trajectory.id, "link": link})
+            return redirect(link)  # render(request, 'trajectory/new.html', {"user": user.id, "trajectory": trajectory.id, "link": link})
     args = {}
     args.update(csrf(request))
     args['form'] = UserForm()

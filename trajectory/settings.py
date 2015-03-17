@@ -42,6 +42,7 @@ INSTALLED_APPS += (
     'trajectory.user',
     'trajectory.event',
     'trajectory.trajectory',
+    #'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,3 +93,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+#CAPTCHA_BACKGROUND_COLOR = 'transparent'
+
