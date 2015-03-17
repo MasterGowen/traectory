@@ -1,7 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
 {% load tz %}
 
 
-<h1>Programs</h1>
+<div class="main-title">
+                <h1><span class="in"><span>Программа мероприятий</span></span></h1>
+      </div>
+            <div class="section breadcrumbs">
+                <div class="row">
+
+                    <div class="col3">
+                        <span class="breadcrumbs-item">
+                            <a href="http://212.193.82.100:8099/ru">Сайт НОТВ-2015</a>
+                        </span>
+                        <span class="divide">/</span>
+                        <span class="breadcrumbs-item">
+                            <a href="/register" class="no-underline">
+                                <span class="dotted">Программа мероприятий</span>
+                                <span class="breadcrumbs-arr"></span>
+                            </a>
+
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+<div class="section content">
+   <div class="row">
 {% for program in object_list %}
 <h2>{{ program.name }}</h2>
 <p>{{ program.comment }}</p>
@@ -25,3 +52,6 @@
 {% empty %}
 <p>No events</p>
 {% endfor %}
+</div></div>
+
+{% endblock %}
