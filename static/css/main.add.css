@@ -1,5 +1,5 @@
 .event {display: table; border-spacing:10px 10px;}
 .event input[type="radio"] {display:none;}
-.event label{display:table-cell; border: 0px solid gray; border-radius: 4px;height: 124px; width: 290px; cursor: pointer}
+.event label{display:table-cell; border: 0px solid gray; border-radius: 4px;height: 125px; width: 290px; cursor: pointer}
 .event label {background: gray}
 .event input:checked +label {background: gold}
