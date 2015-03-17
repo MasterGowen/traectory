@@ -14,7 +14,7 @@ def key():
 
 class Trajectory(models.Model):
     id = models.CharField(max_length=32, primary_key=True, default='None')
-    comment = models.CharField(max_length=2048, blank=True, null=True)
+    comment = models.TextField(max_length=22048, blank=True, null=True)
     user_id = models.CharField(max_length=32, default='None')
 
     def save(self):

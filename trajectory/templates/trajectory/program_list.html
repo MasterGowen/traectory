@@ -28,12 +28,11 @@
 
 <div class="section content">
    <div class="row">
-{% for program in object_list %}
+{% for program in programs %}
 <h2>{{ program.name }}</h2>
 <p>{{ program.comment }}</p>
-<form action="" method="post">
-{% csrf_token %}
-
+<form action="/save/" method="post">
+    {% csrf_token %}
   {% for cell in program.cells.all %}
     <section class="event">
       
