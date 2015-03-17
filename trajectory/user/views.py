@@ -38,7 +38,9 @@ def new_user(request):
             trajectory.user_id = user.id
             trajectory.save()
 
-            link = 'http://localhost:8000/traj/' + trajectory.id
+            link = 'http://localhost/traj/' + trajectory.id + '/'
+            user.link = link
+            user.save()
             #send_mail('NOTV2015', link, 'admin@openedu.urfu.ru', [user.email])
 
             return redirect(link)# render(request, 'trajectory/new.html', {"user": user.id, "trajectory": trajectory.id, "link": link})

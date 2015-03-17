@@ -9,5 +9,7 @@ class ProgramListView(ListView):
     model = Program
 
 
-def trajectory(request, pk):
-    return render(request, 'trajectory/new.html')
+def trajectoryView(request, pk):
+    trajectory = Trajectory.objects.get(pk=pk)
+    user = User.objects.get(pk=trajectory.user_id)
+    return render(request, 'trajectory/trajectory.html', {'user': user})

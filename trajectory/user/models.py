@@ -11,6 +11,7 @@ class User(models.Model):
     email = models.EmailField("Электронная почта", max_length=1024)
     tel = models.CharField("Телефон", max_length=1024)
     trajectories = models.ManyToManyField(Trajectory)
+    link = models.CharField("Персональная ссылка", max_length=1024)
     #files = models.ManyToManyField()
     online = 'online'
     offline = 'offline'
