@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
 {% load tz %}
 
 
@@ -33,7 +32,6 @@
 <h2>{{ program.name }}</h2>
 <p>{{ program.comment }}</p>
 <form action="">
-{{ programm.cells.all }}
 
     {% for cell in program.cells.all %}
     <hr /><hr />
