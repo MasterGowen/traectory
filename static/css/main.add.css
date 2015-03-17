@@ -1,0 +1,3 @@
+.event input[type="radio"] {display:none;}
+.event label p{background: gray}
+.event input:checked +label p{background: gold}
