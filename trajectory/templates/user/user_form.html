@@ -41,13 +41,13 @@
         {% csrf_token %}
 
         <div class="cont-input">
-        <label for="id_i">Имя:</label> 
-        <input id="id_i" maxlength="1024" name="i" type="text">
+        <label for="id_f">Фамилия:</label>
+        <input id="id_f" maxlength="1024" name="f" type="text">
         </div>
 
         <div class="cont-input">
-        <label for="id_f">Фамилия:</label>
-        <input id="id_f" maxlength="1024" name="f" type="text">
+        <label for="id_i">Имя:</label> 
+        <input id="id_i" maxlength="1024" name="i" type="text">
         </div>
 
         <div class="cont-input">
@@ -71,7 +71,7 @@
         </div>
 
         <div class="cont-input">
-        <label for="id_status">Статус:</label>
+        <label for="id_status">Присутствие:</label>
         <select id="id_status" name="status">
             <option value="online">Заочно</option>
             <option value="offline" selected="selected">Очно</option>
