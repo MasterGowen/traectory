@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.core.context_processors import csrf
 from django.utils import timezone
@@ -38,10 +38,10 @@ def new_user(request):
             trajectory.user_id = user.id
             trajectory.save()
 
-            link = 'http://localhost:8000/?traj=' + trajectory.id
+            link = 'http://localhost:8000/traj/' + trajectory.id
             #send_mail('NOTV2015', link, 'admin@openedu.urfu.ru', [user.email])
 
-            return render(request, 'trajectory/new.html', {"user": user.id, "trajectory": trajectory.id, "link": link})
+            return redirect(link)# render(request, 'trajectory/new.html', {"user": user.id, "trajectory": trajectory.id, "link": link})
     args = {}
     args.update(csrf(request))
     args['form'] = UserForm()

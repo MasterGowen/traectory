@@ -34,7 +34,9 @@
                   </header>
             
    
-    <form action="" method="post"><input name="csrfmiddlewaretoken" value="s1E7dXEw5vNMbCff9Py5yLSVn8TqZ6gy" type="hidden">
+    <form action="" method="post">
+
+        {% csrf_token %}
 
         <div class="cont-input">
         <label for="id_i">Имя:</label> 
