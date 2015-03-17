@@ -1,10 +1,152 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="post">{% csrf_token %}
 
-{{form.as_p}}
+<div class="main-title">
+                <h1><span class="in"><span>Регистрация</span></span></h1>
+            </div>
+            <div class="section breadcrumbs">
+                <div class="row">
 
-    <input type="submit" value="Создать" />
+                    <div class="col3">
+                        <span class="breadcrumbs-item">
+                            <a href="/courses">Открытый университет</a>
+                        </span>
+                        <span class="divide">/</span>
+                        <span class="breadcrumbs-item">
+                            <a href="/register" class="no-underline">
+                                <span class="dotted">Регистрация для слушателя</span>
+                                <span class="breadcrumbs-arr"></span>
+                            </a>
 
-</form>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+<div class="section content">
+   <div class="row">
+
+      <div class="col2 lea_alex">
+                  <header>
+                    <h1 class="title">
+                      <span class="title-super">Добро пожаловать!</span>
+                    </h1>
+                  </header>
+            
+   
+    <form action="" method="post"><input name="csrfmiddlewaretoken" value="s1E7dXEw5vNMbCff9Py5yLSVn8TqZ6gy" type="hidden">
+
+        <div class="cont-input">
+        <label for="id_i">Имя:</label> 
+        <input id="id_i" maxlength="1024" name="i" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_f">Фамилия:</label>
+        <input id="id_f" maxlength="1024" name="f" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_o">Отчество:</label>
+        <input id="id_o" maxlength="1024" name="o" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_city">Город:</label>
+        <input id="id_city" maxlength="1024" name="city" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_email">Электронная почта:</label>
+        <input id="id_email" maxlength="1024" name="email" type="email">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_tel">Телефон:</label>
+        <input id="id_tel" maxlength="1024" name="tel" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_status">Статус:</label>
+        <select id="id_status" name="status">
+            <option value="online">Заочно</option>
+            <option value="offline" selected="selected">Очно</option>
+        </select>
+        </div>
+
+        <div class="cont-input cont-btn">
+            <input name="submit" id="submit" class="button action action-primary action-update" value="Создать" type="submit">
+        </div>
+        
+
+    </form>
+
+
+            </div>
+                                  <div class="col">
+                                      <aside role="complementary">
+
+
+
+    
+
+
+<style>
+.smaller {
+  font-size:80%;
+}
+.gray {
+  color: #333;
+}
+
+.smaller-header {
+  font-size: 20px;
+}
+.justify {
+  text-align: justify;
+  text-indent: 20px;
+}
+</style>
+
+
+<div class="smaller">
+
+<header>
+  <h3 class="sr gray">Помощь в регистрации</h3>
+</header>
+
+
+  <div class="cta cta-welcome">
+    <h3 class="gray smaller-header">Добро пожаловать в Открытый университет</h3>
+    <p class="justify">Регистрация на портале Открытого университета позволит Вам получить доступ ко всем электронным курсам.<br>
+    Ещё не выбрали свой курс? Регистрация позволит Вам получать сообщения обо всех новых курсах.</p>
+  </div>
+
+
+<div class="cta cta-nextsteps">
+  <h3 class="gray smaller-header">Следующие шаги</h3>
+    <p class="justify">Заполнив поля формы регистрации и нажав на кнопку, Вы получите электронное сообщение для активации аккаунта. Просто кликните на ссылку внутри для завершения процесса.<br> Не получили сообщение? Проверьте папку "Спам" и пометьте почту от Открытого университета как "не спам".</p>
+
+</div>
+
+
+  <div class="cta cta-help">
+    <h3 class="gray smaller-header">Нужна помощь?</h3>
+    <p class="justify">Нужна помощь в регистрации?
+      <a href="/faq">
+          Возможно, Ваша проблема уже нашла решение в ЧаВо?
+      </a>
+      <br>
+      После регистрации на большинство вопросов можно будет найти ответы в дискуссионных форумах курсов или в ЧаВо.</p>
+  </div>
+
+</div>
+
+  </aside>
+                                  
+    </div>
+  </div>
+</div> <!-- /for-footer -->
+    
+
 {% endblock %}

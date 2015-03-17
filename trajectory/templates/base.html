@@ -4,43 +4,28 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title></title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css">
-		<link rel="stylesheet" type="text/css" href="js/masha/css/masha.css">
-        <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
-                <link rel="stylesheet" type="text/css" href="{% static "css/lea_alex.css" %}"/>
-		
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>		
-    <!--[IF IE]>
-			<script type="text/javascript" src="js/masha/ierange.js"></script>
-    <![ENDIF]-->
-    <script type="text/javascript" src="js/masha/masha.min.js"></script>
-    
-    <script src="js/jquery.placeholder.js" type="text/javascript"></script>
-    <script src="js/generic.js" type="text/javascript"></script>
-		
-		<script>
-    function init_masha(){
-        MaSha.instance = new MaSha({'select_message': 'upmsg-selectable',
-                                    'validate': true,
-                                    'marker': 'marker-bar'});
-    }
-    if (window.addEventListener){
-        window.addEventListener('load', init_masha, false);
-    } else {
-        window.attachEvent('onload', init_masha);
-    }
-    </script>
-	</head>
-	<body class="info-page">
+    <title></title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/lea_alex.css" %}"/>
+    	
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>		
+
+    <script src="{% static "js/jquery.placeholder.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/generic.js" %}" type="text/javascript"></script>
+</head>
+
+<body class="info-page">
     <div class="site">
         <div class="section header">
             <div class="row">
@@ -51,11 +36,11 @@
                     <div class="header-center">
                         <div class="header-right">
                             <div class="lang-switch">
-                                <a class="lang-switch-item active" href="#"><img src="images/header/lang-ru.png" /></a>
-                                <a class="lang-switch-item" href="#"><img src="images/header/lang-en.png" /></a>
+                                <a class="lang-switch-item active" href="#"><img src="{% static "images/header/lang-ru.png" %}" /></a>
+                                <a class="lang-switch-item" href="#"><img src="{% static "images/header/lang-en.png" %}" /></a>
                                 <div class="for-sitemap">
-                                    <a href="#"><img src="images/header/sitemap.png" /></a>
-                                    <a href="#"><img src="images/header/help2.png" class="help-icon" /></a>
+                                    <a href="http://212.193.82.100:8099/ru/sitemap"><img src="{% static "images/header/sitemap.png" %}" /></a>
+                                    <a href="#"><img src="{% static "images/header/help2.png" %}" class="help-icon" /></a>
                                 </div>
                             </div>
                             <div class="user-links">
@@ -69,11 +54,12 @@
                                 <input class="header-search-button" type="submit" value="Найти" />
                             </form>
                             <ul class="submenu">
-                                <li><a href="#">Каталог сервисов</a></li>
-                                <li><a href="#">Новости</a></li>
-                                <li><a href="#">Доступ</a></li>
-                                <li><a href="#">Внешние сервисы</a></li>
-                                <li><a href="#">Сервисы УрФУ</a></li>
+	                            <li class=""><a href="http://212.193.82.100:8099/ru/article/conference_program">Программа конференции</a></li>
+	                            <li class=""><a href="http://212.193.82.100:8099/ru/article/ks">Круглые столы</a></li>
+	                            <li class=""><a href="http://212.193.82.100:8099/ru/article/mk2">Мастер-классы</a></li>
+	                            <li class=""><a href="http://212.193.82.100:8099/ru/article/plenary_sessions">Пленарные доклады</a></li>
+	                            <li class=""><a href="http://212.193.82.100:8099/ru/article/panel_discussion">Панельная дискуссия</a></li>
+	                            <li class=""><a href="http://212.193.82.100:8099/ru/article/actionnotv-2015">Круглые столы и мастер-классы</a></li>
                             </ul>
                         </div>
                     </div>
@@ -82,105 +68,11 @@
         </div>
     
 <div class="for-footer">
-<div class="main-title">
-                <h1><span class="in"><span>Регистрация</span></span></h1>
-            </div>
-            <div class="section breadcrumbs">
-                <div class="row">
 
-                    <div class="col3">
-                        <span class="breadcrumbs-item">
-                            <a href="/courses">Открытый университет</a>
-                        </span>
-                        <span class="divide">/</span>
-                        <span class="breadcrumbs-item">
-                            <a href="/register" class="no-underline">
-                                <span class="dotted">Регистрация для слушателя</span>
-                                <span class="breadcrumbs-arr"></span>
-                            </a>
-
-
-                        </span>
-                    </div>
-                </div>
-            </div>
-<div class="section content">
-   <div class="row">
-
-      <div class="col2 lea_alex">
-                  <header>
-                    <h1 class="title">
-                      <span class="title-super">Добро пожаловать!</span>
-                    </h1>
-                  </header>
             
    {% block content %} <p>Ой, эта страничка пуста!</p>{% endblock %}
-            </div>
-                                  <div class="col">
-                                      <aside role="complementary">
-
-
-
-    
-
-
-<style>
-.smaller {
-  font-size:80%;
-}
-.gray {
-  color: #333;
-}
-
-.smaller-header {
-  font-size: 20px;
-}
-.justify {
-  text-align: justify;
-  text-indent: 20px;
-}
-</style>
-
-
-<div class="smaller">
-
-<header>
-  <h3 class="sr gray">Помощь в регистрации</h3>
-</header>
-
-
-  <div class="cta cta-welcome">
-    <h3 class="gray smaller-header">Добро пожаловать в Открытый университет</h3>
-    <p class="justify">Регистрация на портале Открытого университета позволит Вам получить доступ ко всем электронным курсам.<br>
-    Ещё не выбрали свой курс? Регистрация позволит Вам получать сообщения обо всех новых курсах.</p>
-  </div>
-
-
-<div class="cta cta-nextsteps">
-  <h3 class="gray smaller-header">Следующие шаги</h3>
-    <p class="justify">Заполнив поля формы регистрации и нажав на кнопку, Вы получите электронное сообщение для активации аккаунта. Просто кликните на ссылку внутри для завершения процесса.<br> Не получили сообщение? Проверьте папку "Спам" и пометьте почту от Открытого университета как "не спам".</p>
 
 </div>
-
-
-  <div class="cta cta-help">
-    <h3 class="gray smaller-header">Нужна помощь?</h3>
-    <p class="justify">Нужна помощь в регистрации?
-      <a href="/faq">
-          Возможно, Ваша проблема уже нашла решение в ЧаВо?
-      </a>
-      <br>
-      После регистрации на большинство вопросов можно будет найти ответы в дискуссионных форумах курсов или в ЧаВо.</p>
-  </div>
-
-</div>
-
-  </aside>
-                                  
-    </div>
-  </div>
-</div> <!-- /for-footer -->
-    </div>
     
     <div class="section footer">
       <div class="row">
@@ -216,23 +108,7 @@
       </div>
     </div>		
     
-    <!-- for masha.js -->
-    <div id="upmsg-selectable">
-      <div class="upmsg-selectable-inner">
-        <img src="js/masha/img/textselect/upmsg_arrow.png" alt="">
-        <p>Вы можете отметить интересные вам фрагменты текста, которые будут доступны по уникальной ссылке в адресной строке браузера.</p>
-        <a href="#" class="upmsg_closebtn"></a>
-      </div>
-    </div>
-    <a id="marker-bar" href="#" class="masha-marker-bar">
-      <span class="masha-title">Поделиться цитатой</span>
-      <span class="vk masha-social" data-pattern="http://vk.com/share.php?url={url}" title="share to VK"></span>
-      <span class="facebook masha-social" data-pattern="http://www.facebook.com/share.php?u={url}" title="share to Facebook"></span>
-      <span class="twitter masha-social" data-pattern="http://twitter.com/share?url={url}" title="tweet"></span>
-      <span class="addthis masha-social" data-pattern="" title="share to Add This+"></span>
-    </a>
-    <!-- -->
-		
+
 	</body>
 </html>	
             
