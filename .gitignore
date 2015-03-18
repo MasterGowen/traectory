@@ -102,3 +102,5 @@ $RECYCLE.BIN/
 
 *.sqlite3
 .idea
+
+media/
