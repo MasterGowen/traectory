@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block content %}
 {% load tz %}
 {% load cell_order%}
@@ -46,7 +47,7 @@
         {% if event.image %}
         <img src="{{ event.image.url }}" />
         {% else %}
-        <img src="http://placehold.it/290x119" />
+        <img src="http://placehold.it/290x169" />
         {% endif %}
         <article>
           <header>
@@ -62,8 +63,9 @@
          {% endlocaltime %}
         
       {% endfor %}
-
       </section>
+
+      
     {% endfor %}
 
 
