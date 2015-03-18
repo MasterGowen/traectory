@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 
@@ -23,3 +24,7 @@ urlpatterns = patterns('',
 #urlpatterns += patterns('',
 #    url(r'^captcha/', include('captcha.urls')),
 #)
+
+urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))
