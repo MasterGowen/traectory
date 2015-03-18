@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 
-from .models import Program, Trajectory
+from .models import Program, Trajectory, Cell
 from ..user.models import User
 from ..event.models import Event
 
@@ -30,14 +30,30 @@ def trajectory_save(request):
     data = request.POST.copy()
     data.pop('csrfmiddlewaretoken', None)
     data.pop('submit', None)
+
+    cells_ids = []
+    programs = []
+
     for item in data:
+        cells_ids.append(item)
         event_id = data[item]
         user_event = Event.objects.get(pk=event_id)
         trajectory.events.add(user_event)
+
+    cells = Cell.objects.filter(pk__in=cells_ids)
+
+    for cell in cells:
+        program_id = cell.program_set.all()
+
+    programs = Program.objects.filter(pk__in=program_id)
 
     trajectory.comment = json.dumps(data)
     trajectory.save()
 
     user = User.objects.get(pk=trajectory.user_id)
 
-    return HttpResponse(json.dumps(data), content_type='application/json')
+    return render(request, 'trajectory/trajectory.html', {
+        'user': user,
+        'trajectory': trajectory,
+        'cells': cells,
+        'programs': programs})
