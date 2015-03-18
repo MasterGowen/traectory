@@ -4,7 +4,7 @@
 .event label{border-top: 5px solid #e6e6e6; border-bottom: 5px solid #e6e6e6}
 .event label p{text-align: center;font-family: "open_sanslight";font-size: 26px ;color: #646464}
 .event label article{padding:0 10px 20px;}
-.event label article header p{ text-align: left; font-family: "open_sanslight";font-size: 18px;color: #646464}
+.event label article header p{ text-align: left; font-family: "open_sanslight";font-size: 18px;color: #646464;line-height: 22px;}
 .event label article p{text-align: left; font-family: "open_sansregular";font-size: 12px;color: #646464}
 .event label {background: #FFF}
 .event input:checked +label {border-top: 5px solid #2D88A5; border-bottom: 5px solid #2D88A5; background: #FFF; }
