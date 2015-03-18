@@ -31,7 +31,7 @@ def new_user(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.save()  # TODO:  сгенерить линк и отправить юзеру
+            user.save()
 
             trajectory = Trajectory()
             trajectory.user_id = user.id

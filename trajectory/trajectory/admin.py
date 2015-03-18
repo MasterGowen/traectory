@@ -13,6 +13,7 @@ class ProgramAdmin(admin.ModelAdmin):
 
 class CellAdmin(admin.ModelAdmin):
     filter_horizontal = ('events',)
+    list_display = ('name', 'step')
 
 admin.site.register(Trajectory, TrajectoryAdmin)
 admin.site.register(Cell, CellAdmin)

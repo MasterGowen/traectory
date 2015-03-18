@@ -26,6 +26,7 @@ class Trajectory(models.Model):
 
 class Cell(models.Model):
     id = models.CharField(max_length=32, primary_key=True, default='None')
+    step = models.IntegerField(max_length=8, blank=True, null=True)
     name = models.CharField('Название', max_length=1024, default='Ячейка')
     events = models.ManyToManyField(Event)
 

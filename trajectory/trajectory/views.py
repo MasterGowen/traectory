@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 
 from .models import Program, Trajectory
 from ..user.models import User
+from ..event.models import Event
 
 
 class ProgramListView(ListView):
@@ -29,7 +30,10 @@ def trajectory_save(request):
     data = request.POST.copy()
     data.pop('csrfmiddlewaretoken', None)
     data.pop('submit', None)
-    #for cell, event in data:
+    for item in data:
+        event_id = data[item]
+        user_event = Event.objects.get(pk=event_id)
+        trajectory.events.add(user_event)
 
     trajectory.comment = json.dumps(data)
     trajectory.save()
