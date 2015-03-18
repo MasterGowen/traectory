@@ -2,8 +2,8 @@
 {% block content %}
 {% load tz %}
 
-
-<div class="main-title">
+<div class="for-footer">
+  <div class="main-title">
                 <h1><span class="in"><span>Программа мероприятий</span></span></h1>
       </div>
             <div class="section breadcrumbs">
@@ -26,27 +26,37 @@
                 </div>
             </div>
 
-<div class="section content">
-   <div class="row">
-{% for program in programs %}
-<h2>{{ program.name }}</h2>
-<p>{{ program.comment }}</p>
-<form action="/save/" method="post">
+
+  <div class="row">
+    {% for program in programs %}
+    <h2>{{ program.name }}</h2>
+    <p>{{ program.comment }}</p>
+  <form action="/save/" method="post">
     {% csrf_token %}
   {% for cell in program.cells.all %}
     <section class="event">
       
-        <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked><label for="{{ cell.id }}"><p>Не пойду</p></label>
+        <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked><label for="{{ cell.id }}">
+          <p>Не участвую</p>
+        </label>
         {% for event in cell.events.all %}
 
-        <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}"><label for="{{ event.id }}"><p>{{ event.name }}<br />
-         {{ event.comment }}</p>
+        <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}"><label for="{{ event.id }}">
+        <img src="http://placehold.it/290x119" />
+        <article>
+          <header>
+            <p>{{ event.name }}</p>
+          </header>
+         <p>{{ event.comment }}</p>
          {% localtime on %}
-      <p>{{ event.startdate|date}}<br />
-      	<em>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}</em></p></label>
+      <p>{{ event.startdate|date:""}}<br />
+      	<em>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}</em></p>
+</article>
+        </label>
          {% endlocaltime %}
-         
+        
       {% endfor %}
+
       </section>
     {% endfor %}
 
@@ -61,10 +71,10 @@
 </form>
 
 </div>
+
+
+
 </div>
-
-
-
 
 
 
