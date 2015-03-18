@@ -49,8 +49,7 @@
           </header>
          <p>{{ event.comment }}</p>
          {% localtime on %}
-      <p>{{ event.startdate|date:""}}<br />
-      	<em>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}</em></p>
+      <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
 </article>
         </label>
          {% endlocaltime %}
