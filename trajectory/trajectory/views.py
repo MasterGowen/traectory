@@ -29,6 +29,8 @@ def trajectory_save(request):
     data = request.POST.copy()
     data.pop('csrfmiddlewaretoken', None)
     data.pop('submit', None)
+    #for cell, event in data:
+
     trajectory.comment = json.dumps(data)
     trajectory.save()
 
