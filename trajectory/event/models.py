@@ -1,14 +1,10 @@
-from django.db import models
 import hashlib
 from os import urandom
+from django.db import models
 
-
-#from ..traectory.models import Program
 
 def key():
-
-    key = hashlib.md5(urandom(128)).hexdigest()
-    return key
+    return hashlib.md5(urandom(128)).hexdigest()
 
 
 class Event(models.Model):
@@ -17,8 +13,7 @@ class Event(models.Model):
     comment = models.TextField("Описание", max_length=4096, blank=True, null=True)
     startdate = models.DateTimeField(blank=True, null=True)
     enddate = models.DateTimeField(blank=True, null=True)
-    image = models.ImageField(verbose_name='Image', upload_to='images/%Y/%m', blank=True,)
-    #program = models.ForeignKey(Program)
+    image = models.ImageField(verbose_name='Image', upload_to='images/%Y/%m', blank=True)
 
     def __str__(self):
         return self.name

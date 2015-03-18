@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+{% load tz %}
+
+        {% for file in files %}
+        <a href="{{ file.file.url }}">{{ file.name }}</a> <span>{{ file.date }}</span>
+        {% endfor %}
+
+<form name="fileform" action="" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<p><label for="id_name">Название:</label> <input id="id_name" maxlength="4096" name="name" type="text"></p>
+<p><label for="id_file">User file:</label> <input id="id_file" name="file" type="file"></p>
+
+        <button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Upload</button>
+
+</form>
+
+<script>
+    function ajaxFileUpload()
+    {
+        $("#loading")
+        .ajaxStart(function(){
+            $(this).show();
+        })
+        .ajaxComplete(function(){
+            $(this).hide();
+        });
+
+
+        $.ajaxFileUpload
+        (
+            {
+                url:window.location.pathname.substr(1),
+                secureuri:false,
+                fileElementId:'id_file',
+                dataType: 'json',
+                success: function (data, status)
+                {
+                    if(typeof(data.error) != 'undefined')
+                    {
+                        if(data.error != '')
+                        {
+                            alert(data.error);
+                        }else
+                        {
+                            alert(data.msg);
+                        }
+                    }
+                },
+                error: function (data, status, e)
+                {
+                    alert(e);
+                }
+            }
+        )
+
+        return false;
+
+    }
+</script>
+{%endblock%}

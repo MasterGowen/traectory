@@ -3,24 +3,24 @@ import hashlib
 from os import urandom
 
 from ..trajectory.models import Trajectory
+#from ..files.models import UserFile
 
 
 def key():
-
-    key = hashlib.md5(urandom(128)).hexdigest()
-    return key
+    return hashlib.md5(urandom(128)).hexdigest()
 
 
 class User(models.Model):
+    id = models.CharField(max_length=32, primary_key=True, default='None')
     i = models.CharField("Имя", max_length=1024)
     f = models.CharField("Фамилия", max_length=1024)
-    o = models.CharField("Отчество", max_length=1024, blank=True, null=True)
+    o = models.CharField("Отчество", max_length=1024)
     city = models.CharField("Город", max_length=1024, blank=True, null=True)
     email = models.EmailField("Электронная почта", max_length=1024)
     tel = models.CharField("Телефон", max_length=1024)
     trajectories = models.ManyToManyField(Trajectory)
     link = models.CharField("Персональная ссылка", max_length=1024, blank=True, null=True)
-    #files = models.ManyToManyField()
+    #files = models.ManyToManyField(UserFile, blank=True, null=True)
     online = 'online'
     offline = 'offline'
     STATUS = (

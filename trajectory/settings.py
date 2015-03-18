@@ -42,6 +42,7 @@ INSTALLED_APPS += (
     'trajectory.user',
     'trajectory.event',
     'trajectory.trajectory',
+    'trajectory.files',
     #'captcha',
 )
 

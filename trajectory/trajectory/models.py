@@ -7,9 +7,7 @@ from ..event.models import Event
 
 
 def key():
-
-    key = hashlib.md5(urandom(128)).hexdigest()
-    return key
+    return hashlib.md5(urandom(128)).hexdigest()
 
 
 class Trajectory(models.Model):

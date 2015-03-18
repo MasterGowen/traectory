@@ -1,6 +1,5 @@
 import json
 
-from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
@@ -18,7 +17,11 @@ def trajectory_view(request, pk):
     programs = Program.objects.all()
     trajectory = Trajectory.objects.get(pk=pk)
     user = User.objects.get(pk=trajectory.user_id)
-    return render(request, 'trajectory/program_list.html', {'user': user, 'programs': programs})
+    return render(request, 'trajectory/program_list.html',
+                  {
+                      'user': user,
+                      'programs': programs
+                  })
 
 
 @require_POST
@@ -32,7 +35,6 @@ def trajectory_save(request):
     data.pop('submit', None)
 
     cells_ids = []
-    programs = []
 
     for item in data:
         cells_ids.append(item)
@@ -56,4 +58,5 @@ def trajectory_save(request):
         'user': user,
         'trajectory': trajectory,
         'cells': cells,
-        'programs': programs})
+        'programs': programs
+    })

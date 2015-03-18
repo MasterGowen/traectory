@@ -1,3 +1,30 @@
 from django.shortcuts import render
 
-# Create your views here.
+from ..user.models import User
+from .form import UserFileForm
+from .models import UserFile
+
+
+def user_files(request, pk):
+    user = User.objects.get(pk=pk)
+    form = UserFileForm
+
+    if request.method == 'POST':
+        form = UserFileForm(request.POST, request.FILES)
+        print(request.FILES)
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.user = user
+            form.save()
+
+    files = UserFile.objects.filter(user=user)
+
+    return render(request, 'files/files.html',
+                  {
+                      'user': user,
+                      'form': form,
+                      'files': files,
+
+                  })
+
+
