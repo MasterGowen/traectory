@@ -17,7 +17,7 @@
                         <span class="divide">/</span>
                         <span class="breadcrumbs-item">
                             <a href="/register" class="no-underline">
-                                <span class="dotted">Программа мероприятий</span>
+                                <span class="dotted">Программа мероприятий <b>{{user.link}}</b></span>
                                 <span class="breadcrumbs-arr"></span>
                             </a>
 
@@ -72,14 +72,4 @@
 {% endfor %}
 </div>
 </div>
-
-
-
 {% endblock %}
-{{user.f}} {{user.i}} {{user.o}}<br />
-<b>Ваша персональная ссылка: {{user.link}}</b>
-<h2>{{ programs }}</h2>
-<p>{{ cells|sort_by:'step' }}</p>
-
-</body>
-</html>
