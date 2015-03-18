@@ -14,9 +14,10 @@ def key():
 class Event(models.Model):
     id = models.CharField(max_length=32, primary_key=True, default='None')
     name = models.CharField("Имя", max_length=1024)
-    comment = models.TextField("Описание", max_length=4096)
+    comment = models.TextField("Описание", max_length=4096, blank=True, null=True)
     startdate = models.DateTimeField()
     enddate = models.DateTimeField()
+    image = models.ImageField(verbose_name='Image', upload_to='images/%Y/%m', blank=True,)
     #program = models.ForeignKey(Program)
 
     def __str__(self):
