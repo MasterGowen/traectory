@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .user.views import UserListView, new_user
 from .event.views import EventListView
-from .trajectory.views import ProgramListView, trajectory_view, trajectory_save
+from .trajectory.views import ProgramListView, trajectory_view, trajectory_save, stats
 from .files.views import user_files
 
 urlpatterns = patterns('',
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^$', new_user, name='create_user'),
     url(r'^tr/(?P<pk>.+)/$', trajectory_view, name='trajectoryView'),
     url(r'^save/$', trajectory_save, name='trajectorySave'),
+    url(r'^stats/$', stats, name='stats'),
 
     url(r'^files/(?P<pk>.+)/$', user_files, name='Files'),
 

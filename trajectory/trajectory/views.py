@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .models import Program, Trajectory, Cell
 from ..user.models import User
@@ -66,4 +67,22 @@ def trajectory_save(request):
         'trajectory': trajectory,
         'cells': cells,
         'programs': programs
+    })
+
+
+@staff_member_required
+def stats(request):
+    event_users = {}
+    event_users.clear()
+    events = Event.objects.all()
+    for event in events:
+        users_ids = []
+        trajectories = event.trajectory_set.all()
+        for trajectory in trajectories:
+            users_ids.append(trajectory.user_id)
+        users = User.objects.filter(pk__in=users_ids)
+        event_users[event] = users
+
+    return render(request, 'trajectory/stats.html', {
+        'event_users': event_users,
     })
