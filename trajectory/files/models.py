@@ -8,11 +8,11 @@ from ..user.models import User
 
 
 def key():
-    return hashlib.md5(urandom(128)).hexdigest()
+    return hashlib.md5(urandom(128)).hexdigest()[:16]
 
 
 class UserFile(models.Model):
-    id = models.CharField(max_length=32, primary_key=True, default='None')
+    id = models.CharField(max_length=16, primary_key=True, default='None')
     name = models.CharField('Название', max_length=4096)
     file = models.FileField(verbose_name='User file', upload_to='files/%Y/%m')
     date = models.DateField(auto_now_add=True, default=datetime.now())
