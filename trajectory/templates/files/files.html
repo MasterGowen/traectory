@@ -2,19 +2,69 @@
 {% block content %}
 {% load tz %}
 
-        {% for file in files %}
-        <a href="{{ file.file.url }}">{{ file.name }}</a> <span>{{ file.date }}</span><br />
-        {% endfor %}
+<div class="for-footer">
+  <div class="main-title">
+                <h1><span class="in"><span>Материалы для публикации</span></span></h1>
+      </div>
+            <div class="section breadcrumbs">
+                <div class="row">
+
+                    <div class="col3">
+                        <span class="breadcrumbs-item">
+                            <a href="http://212.193.82.100:8099/ru">Сайт НОТВ-2015</a>
+                        </span>
+                        <span class="divide">/</span>
+                        <span class="breadcrumbs-item">
+                            <a href="/register" class="no-underline">
+                                <span class="dotted">Материалы для публикации</span>
+                                <span class="breadcrumbs-arr"></span>
+                            </a>
+
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="section content">
+   <div class="row">
+
+        <div class="col2 lea_alex">
+                  <header>
+                    <h1 class="title">
+                      <span class="title-super">Добро пожаловать!</span>
+                    </h1>
+                  </header>
+
 
 <form name="fileform" action="" method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 <input id="id_id" maxlength="32" name="id" value="None" type="hidden">
-<p><label for="id_name">Название:</label> <input id="id_name" maxlength="4096" name="name" type="text"></p>
-<p><label for="id_file">User file:</label> <input id="id_file" name="file" type="file"></p>
-<button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Upload</button>
-
+<div class="cont-input">
+<label for="id_name">Название:</label> <input id="id_name" maxlength="4096" name="name" type="text"></div>
+<div class="cont-input">
+<label for="id_file">Файл для загрузки:</label> <input id="id_file" name="file" type="file"></div>
+<div class="cont-input">
+<button class="button_create" id="buttonUpload" onclick="return ajaxFileUpload();">Загрузить файл</button>
+</div>
 </form>
+</div>
 
+<div class="col1">
+<h2>Инструкция<h2>   
+
+</div></div>
+</div>
+<div class="row">
+<section class="article ">
+                {% for file in files %}
+        <a href="{{ file.file.url }}">{{ file.name }}</a> <span>{{ file.date }}</span><br />
+        {% endfor %} 
+</section>
+</div>
+
+</div>
 <script>
     function ajaxFileUpload()
     {

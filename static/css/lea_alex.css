@@ -214,7 +214,7 @@
 .lea_alex .cont-btn,
 .layer-registration .layer-in .cont-btn,
 .layer-faq .layer-in .cont-btn {
-  text-align: center;
+  /*text-align: center;*/
 }
 .layer-auth .layer-bottom,
 .layer-registration .layer-bottom,

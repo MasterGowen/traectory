@@ -10,3 +10,4 @@
 .event label {background: #FFF}
 .event input:checked +label {border-top: 5px solid #2D88A5; border-bottom: 5px solid #2D88A5; background: #FFF; }
 .button_submit {width: 890px; height: 40px; font-size: 18px !important}
+.button_create {width: 530px; height: 40px; font-size: 18px !important}
