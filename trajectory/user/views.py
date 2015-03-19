@@ -20,12 +20,6 @@ class UserListView(ListView):
         return context
 
 
-class UserCreate(CreateView):  # TODO: DEPRECATED
-    model = User
-
-    success_url = '/users/'
-
-
 def new_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -41,7 +35,7 @@ def new_user(request):
             user.link = link
             user.save()
             try:
-                send_mail('НОТВ 2015', 'Ваша уникальная ссылка:'+link, 'admin@openedu.urfu.ru', [user.email])
+                send_mail('НОТВ 2015', 'Ваша уникальная ссылка:'+link, 'admin@notv.urfu.ru', [user.email])
             except:
                 pass
             return redirect(link)

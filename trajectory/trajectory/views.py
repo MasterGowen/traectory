@@ -28,7 +28,6 @@ def trajectory_save(request):
 
     trajectory.events.clear()
 
-
     data = request.POST.copy()
     data.pop('csrfmiddlewaretoken', None)
     data.pop('submit', None)
@@ -82,5 +81,6 @@ def stats(request):
 
     return render(request, 'trajectory/stats.html', {
         'event_users': event_users,
+        'number_users': number_users,
 
     })
