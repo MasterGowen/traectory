@@ -1,15 +1,16 @@
 from django.db import models
+import hashlib
 from os import urandom
 
 from ..trajectory.models import Trajectory
 
 
 def key():
-    return int.from_bytes(urandom(32), byteorder="little")[:32]
+    return hashlib.md5(urandom(128)).hexdigest()[:32]
 
 
 class User(models.Model):
-    id = models.IntegerField(max_length=32, primary_key=True, default=0)
+    id = models.CharField(max_length=32, primary_key=True, default='None')
     i = models.CharField("Имя", max_length=1024)
     f = models.CharField("Фамилия", max_length=1024)
     o = models.CharField("Отчество", max_length=1024)
@@ -31,6 +32,6 @@ class User(models.Model):
         unique_together = ("email", "f")
 
     def save(self):
-        if self.id == 0:
+        if self.id == 'None':
             self.id = key()
         super(User, self).save()
