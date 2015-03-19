@@ -7,11 +7,11 @@ from ..event.models import Event
 
 
 def key():
-    return hashlib.md5(urandom(128)).hexdigest()[:16]
+    return hashlib.md5(urandom(128)).hexdigest()
 
 
 class Trajectory(models.Model):
-    id = models.CharField(max_length=16, primary_key=True, default='None')
+    id = models.CharField(max_length=32, primary_key=True, default='None')
     comment = models.TextField(max_length=22048, blank=True, null=True)
     user_id = models.CharField(max_length=32, default='None')
     events = models.ManyToManyField(Event)
