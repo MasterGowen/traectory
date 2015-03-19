@@ -1,6 +1,5 @@
 import json
 
-from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,10 +8,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .models import Program, Trajectory, Cell
 from ..user.models import User
 from ..event.models import Event
-
-
-class ProgramListView(ListView):
-    model = Program
 
 
 def trajectory_view(request, pk):
@@ -83,6 +78,9 @@ def stats(request):
         users = User.objects.filter(pk__in=users_ids)
         event_users[event] = users
 
+    number_users = len(User.objects.all())
+
     return render(request, 'trajectory/stats.html', {
         'event_users': event_users,
+
     })

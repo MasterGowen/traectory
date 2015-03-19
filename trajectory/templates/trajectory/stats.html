@@ -8,13 +8,14 @@
 {% for event, users in event_users.items %}
 <h3>{{ event.name }}</h3>
 <p>{{ event.comment }}</p>
-  <ul>
+  <ol>
   {% for user in users %}
 
-        <li>{{ user.f }} {{ user.i }} {{ user.o }}</li>
+        <li>{{ user.f }} {{ user.i }} {{ user.o }}<br />
+        <span>{{ user.status }}</span></li>
 
   {% endfor %}
-  </ul>
+  </ol>
 
 {% endfor%}
 </body>
