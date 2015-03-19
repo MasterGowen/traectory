@@ -3,6 +3,7 @@ import json
 from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Program, Trajectory, Cell
 from ..user.models import User
@@ -29,6 +30,8 @@ def trajectory_save(request):
     trajectory_id = request.META['HTTP_REFERER'].split('/')[-2]
     trajectory = Trajectory.objects.get(pk=trajectory_id)
 
+    trajectory.events.clear()
+
 
     data = request.POST.copy()
     data.pop('csrfmiddlewaretoken', None)
@@ -39,8 +42,12 @@ def trajectory_save(request):
     for item in data:
         cells_ids.append(item)
         event_id = data[item]
-        user_event = Event.objects.get(pk=event_id)
-        trajectory.events.add(user_event)
+        try:
+            user_event = Event.objects.get(pk=event_id)
+        except ObjectDoesNotExist:
+            user_event = 'None'
+        if user_event:
+            trajectory.events.add(user_event)
 
     cells = Cell.objects.filter(pk__in=cells_ids)
 
