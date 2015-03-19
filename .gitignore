@@ -104,3 +104,7 @@ $RECYCLE.BIN/
 .idea
 
 media/
+trajectory/event/migrations/
+trajectory/files/migrations/
+trajectory/user/migrations/
+trajectory/trajectory/migrations/

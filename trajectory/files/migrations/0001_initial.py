@@ -15,11 +15,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserFile',
             fields=[
-                ('id', models.CharField(serialize=False, default='None', max_length=32, primary_key=True)),
-                ('name', models.CharField(verbose_name='Название', max_length=4096)),
-                ('file', models.FileField(verbose_name='User file', upload_to='files/%Y/%m')),
-                ('date', models.DateField(default=datetime.datetime(2015, 3, 18, 18, 24, 59, 83442), auto_now_add=True)),
-                ('user', models.ForeignKey(to='user.User', blank=True, null=True)),
+                ('id', models.CharField(primary_key=True, default='None', max_length=32, serialize=False)),
+                ('name', models.CharField(max_length=4096, verbose_name='Название')),
+                ('file', models.FileField(upload_to='files/%Y/%m', verbose_name='User file')),
+                ('date', models.DateField(default=datetime.datetime(2015, 3, 19, 14, 2, 17, 220172), auto_now_add=True)),
+                ('user', models.ForeignKey(blank=True, to='user.User', null=True)),
             ],
             options={
             },
