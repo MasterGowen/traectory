@@ -14,10 +14,14 @@ def trajectory_view(request, pk):
     programs = Program.objects.all()
     trajectory = Trajectory.objects.get(pk=pk)
     user = User.objects.get(pk=trajectory.user_id)
+    active_events = []
+    for event in trajectory.events.all():
+        active_events.append(event.id)
     return render(request, 'trajectory/program_list.html',
                   {
                       'user': user,
-                      'programs': programs
+                      'programs': programs,
+                      'active_events': active_events,
                   })
 
 
