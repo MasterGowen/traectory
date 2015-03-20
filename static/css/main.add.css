@@ -11,3 +11,7 @@
 .event input:checked +label {border-top: 5px solid #2D88A5; border-bottom: 5px solid #2D88A5; background: #FFF; }
 .button_submit {width: 890px; height: 40px; font-size: 18px !important}
 .button_create {width: 530px; height: 40px; font-size: 18px !important}
+.files .file-item {display: inline-block; position: relative;padding: 10px 20px 10px 45px}
+.files .file-item:hover {background-color: #e6e6e6}
+.files .file-item .del{display:none; position: absolute;right: -5px; top: -5px}
+.files .file-item:hover .del{display:block;}
