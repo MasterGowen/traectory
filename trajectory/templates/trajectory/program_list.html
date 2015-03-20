@@ -81,9 +81,17 @@
 </div>
 
 
-{{ active_events }}
+
 </div>
 
+<script>
+  {% for active_event in active_events %}
+  
 
+  $("#{{ active_event }}").prop( "checked", true )
+
+  {% endfor %}
+
+</script>
 
 {% endblock %}

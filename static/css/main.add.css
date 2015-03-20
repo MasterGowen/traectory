@@ -12,6 +12,24 @@
 .button_submit {width: 890px; height: 40px; font-size: 18px !important}
 .button_create {width: 530px; height: 40px; font-size: 18px !important}
 .files .file-item {display: inline-block; position: relative;padding: 10px 20px 10px 45px}
-.files .file-item:hover {background-color: #e6e6e6}
+.files .file-item:hover {background-color: #eaeaea}
 .files .file-item .del{display:none; position: absolute;right: -5px; top: -5px}
 .files .file-item:hover .del{display:block;}
+.files a[href$=".png"]::before,
+.files a[href$=".torrent"]::before,
+ {
+    position: relative;
+    display: inline-block;
+    float: left;
+    margin-left: -30px;
+    margin-top: 4px;
+    padding: 15px 0px 0px 3px;
+    width: 24px;
+    height: 32px;
+    line-height: 16px;
+    box-sizing: border-box;
+    color: grey;
+    font-family: open_sanssemibold;
+    font-size: 10px;
+    content: "File";
+    background: transparent url("/static/images/files/default.png") repeat scroll 0% 0%;}
