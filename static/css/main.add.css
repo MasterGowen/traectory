@@ -98,3 +98,16 @@
 .files a[href$=".xls"]::before{content: "xls";}
 .files a[href$=".xlsx"]::before{content: "xlsx";}
 .files a[href$=".docx"]::before{content: "docx";}
+
+
+
+span.change .edit-link {
+    display: inline-block;
+    height: 17px;
+    width: 16px;
+    background: transparent url("../images/edit-link.png") no-repeat scroll 0% 0%;
+margin-left: 2px;
+margin-bottom: -2px;}
+
+/*Непонятные косячки*/
+.section.header .userpanel .userpanel-inner .username {    margin-right: 4px;}
