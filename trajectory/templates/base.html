@@ -36,13 +36,13 @@
                                 <a class="lang-switch-item" href="#"><img src="{% static "images/header/lang-en.png" %}" /></a>
                                 <div class="for-sitemap">
                                     <a href="http://212.193.82.100:8099/ru/sitemap"><img src="{% static "images/header/sitemap.png" %}" /></a>
-
+                                    <a href="#"><img src="{% static "images/header/help2.png" %}" class="help-icon" /></a>
                                 </div>
                             </div>
 
                             <div class="user-links">
                                 {% if user.f %}
-                                <p class="a-right"><a href="#" onclick="document.getElementsByClassName('userpanel')[0].style.display=''" class="username">{{user.f }} {{user.i }}</a><a href="" onclick="document.getElementsByClassName('userpanel')[0].style.display=''"><img src="{% static "images/path/expand-arrow-down.png" %}"></a></p>
+                                <p class="a-right"><a href="#" onclick="document.getElementsByClassName('userpanel')[0].style.display=''" class="username">{{user.f }} {{user.i }}</a><a href=""><img src="{% static "images/path/expand-arrow-down.png" %}"></a></p>
                                 {% endif %}
                             </div>
                         </div>
@@ -63,11 +63,11 @@
                     </div>
                     <div class="userpanel" style="display:none">
                         <div class="userpanel-inner">
-                            <p class="a-right"><a href="#" onclick="document.getElementsByClassName('userpanel')[0].style.display='none'" class="username">{{user.f }} {{user.i }}</a><a href="#" onclick="document.getElementsByClassName('userpanel')[0].style.display='none'"><img src="{% static "images/path/expand-arrow-up.png" %}"></a></p>
+                            <p class="a-right"><a href="#" onclick="document.getElementsByClassName('userpanel')[0].style.display='none'" class="username">{{user.f }} {{user.i }}</a><a href=""><img src="{% static "images/path/expand-arrow-up.png" %}"></a></p>
                             <form>
                                 <fieldset>
                                     <label>Траектории:</label><br />
-                                    <span class="watchmode">Мероприятия НОТВ-2015</span>
+                                    <span class="watchmode">Мнроприятия НОТВ-2015</span>
                                     <a href="{{user.link}}" class="edit-link"></a>
                                 </fieldset>
                             </form>
@@ -113,7 +113,7 @@
                                 <li><a href="#"><i class="icon-instagram"></i>Instagram</a></li>
                             </ul>
                         </div>
-
+                        <p class="developers">Разработано в <a href="#" target="_blank">Артсофте</a></p>
                     </div>
                 </div>
             </div>
