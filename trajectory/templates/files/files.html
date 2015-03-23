@@ -31,7 +31,7 @@
         <div class="col2 lea_alex">
                   <header>
                     <h1 class="title">
-                      <span class="title-super">Заголовок</span>
+                      <span class="title-super">Загрузка файлов</span>
                     </h1>
                   </header>
 
@@ -47,27 +47,15 @@
 <button class="button_create" id="buttonUpload" onclick="return ajaxFileUpload();">Загрузить файл</button>
 </div>
 </form>
-</div>
 
-<div class="col1">
-<h2>Инструкция<h2>   
-
-</div>
-
-</div>
-</div>
-
-
-<div class="section content">
-<div class="row">
 <section class="article ">
 
 
 <div class="files">
                   
-                    <h3 >
+                    <h2 >
                       Ваши загруженные файлы
-                    </h3>
+                    </h2>
                  
 
                 {% for file in files %}
@@ -80,7 +68,64 @@
         </div>
 </section>
 </div>
+
+<style>
+.smaller {
+  font-size:80%;
+}
+.gray {
+  color: #333;
+}
+
+.smaller-header {
+  font-size: 20px;
+}
+.justify {
+  text-align: justify;
+  text-indent: 20px;
+}
+</style>
+
+<div class="col">
+<div class="smaller">
+
+<header>
+  <h3 class="sr gray">Инструкция</h3>
+</header>
+  <div class="cta cta-welcome">
+    <h3 class="gray smaller-header">Шаг первый</h3>
+    <p class="justify">
+        Для публикации в электронном сборнике материалов конференции необходимо загрузить на сайт конференции материалы до 15.04.2015г. 
+    </p>
+  </div>
+
+
+<div class="cta cta-nextsteps">
+  <h3 class="gray smaller-header">Шаг второй</h3>
+    <p class="justify">
+      Материалы загружаются в виде файла в формате Microsoft Word (.doc или .docx), содержащем последовательно название доклада, список авторов с контактными данными (например, Иванов И.И., к.т.н., доцент, i.i.ivanov@urfu.ru; Петров П.П., …), название организации, город, аннотацию на русском языке, название доклада, список авторов и аннотацию на английском языке, текст доклада с рисунками, имеющими подрисуночные надписи, ссылки и библиографический список. Дополнительно могут быть представлены образцы образовательных ресурсов и демонстрационные версии программных продуктов (общий объём до 100 Мб) для размещения на электронном носителе.
+    </p>
+
 </div>
+
+
+  <div class="cta cta-help">
+    <h3 class="gray smaller-header">Нужна помощь?</h3>
+    <p class="justify">Нужна помощь в регистрации?  <a href="/faq"> Возможно, Ваша проблема уже нашла решение в ЧаВо? </a> </p>
+  </div>
+
+
+
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
 </div>
 <script>
     function ajaxFileUpload()
