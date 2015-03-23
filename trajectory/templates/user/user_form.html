@@ -6,25 +6,26 @@
 
                 <h1><span class="in"><span>Регистрация</span></span></h1>
             </div>
+
             <div class="section breadcrumbs">
                 <div class="row">
 
                     <div class="col3">
                         <span class="breadcrumbs-item">
-                            <a href="/courses">Открытый университет</a>
+                            <a href="http://notv.urfu.ru/ru">Сайт НОТВ-2015</a>
                         </span>
                         <span class="divide">/</span>
                         <span class="breadcrumbs-item">
-                            <a href="/register" class="no-underline">
-                                <span class="dotted">Регистрация для слушателя</span>
-                                <span class="breadcrumbs-arr"></span>
-                            </a>
+                            <a href="{{user.link}}" class="no-underline">
+                                <span>Регистрация</span>
+                             </a>
 
 
                         </span>
                     </div>
                 </div>
             </div>
+
 <div class="section content">
    <div class="row">
 
@@ -53,6 +54,16 @@
         <div class="cont-input">
         <label for="id_o">Отчество:</label>
         <input id="id_o" maxlength="1024" name="o" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_org">Организация:</label>
+        <input id="id_org" maxlength="1024" name="org" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_job">Организация:</label>
+        <input id="id_job" maxlength="1024" name="job" type="text">
         </div>
 
         <div class="cont-input">
