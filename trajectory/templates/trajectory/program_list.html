@@ -28,56 +28,49 @@
             </div>
 
 
-  <div class="row">
-    {% for program in programs %}
-    <h2>{{ program.name }}</h2>
-    <p>{{ program.comment }}</p>
-  <form action="/save/" method="post">
-    {% csrf_token %}
-  {% for cell in program.cells.all|sort_by:'step' %}
-    <section class="event">
-      
-        <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked><label for="{{ cell.id }}">
-          <p>Не участвую</p>
-        </label>
-        {% for event in cell.events.all %}
-
-        <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}"><label for="{{ event.id }}">
-        {% if event.image %}
-        <img src="{{ event.image.url }}" />
-        {% else %}
-        <img src="http://placehold.it/290x119" />
-        {% endif %}
-        <article>
-          <header>
-            <p>{{ event.name }}</p>
-          </header>
-         <p>{{ event.comment }}</p>
-         {% localtime on %}
-            {% if event.startdate %}
-              <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
-            {% endif %}
-</article>
-        </label>
-         {% endlocaltime %}
-        
-      {% endfor %}
-      </section>
-
-      
-    {% endfor %}
-
-
-
-{% empty %}
-<p>No events</p>
-{% endfor %}
-        <div class="cont-input cont-btn">
-            <input name="submit" id="submit" class="button_submit" value="Сохранить траекторию" type="submit">
-        </div>
-</form>
-
-</div>
+    <div class="row">
+        <form action="/save/" method="post">
+        {% csrf_token %}
+            {% for program in programs %}
+                <h2>{{ program.name }}</h2>
+                <p>{{ program.comment }}</p>
+                {% for cell in program.cells.all|sort_by:'step' %}
+                    <section class="event">      
+                        <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked>
+                        <label for="{{ cell.id }}">
+                        <p>Не участвую</p>
+                        </label>
+                        {% for event in cell.events.all %}
+                            <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}">
+                            <label for="{{ event.id }}">
+                                {% if event.image %}
+                                <img src="{{ event.image.url }}" />
+                                {% else %}
+                                <img src="http://placehold.it/290x119" />
+                                {% endif %}
+                                <article>
+                                    <header>
+                                        <p>{{ event.name }}</p>
+                                    </header>
+                                    <p>{{ event.comment }}</p>
+                                    {% localtime on %}
+                                        {% if event.startdate %}
+                                            <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
+                                        {% endif %}
+                                    {% endlocaltime %}
+                                </article>
+                            </label>
+                        {% endfor %}
+                    </section>
+                {% endfor %}
+                {% empty %}
+                    <p>На данный момент нет ни одного мероприятия для формирования траектории</p>
+            {% endfor %}
+            <div class="cont-input cont-btn">
+                <input name="submit" id="submit" class="button_submit" value="Сохранить траекторию" type="submit">
+            </div>
+        </form>
+    </div>
 
 
 
