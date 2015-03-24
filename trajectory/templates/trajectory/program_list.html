@@ -64,7 +64,7 @@
                     </section>
                 {% endfor %}
                 {% empty %}
-                    <p>На данный момент нет ни одного мероприятия для формирования траектории</p>
+                    <h3 class="disable">На данный момент нет ни одного мероприятия для формирования траектории</h3>
             {% endfor %}
             <div class="cont-input cont-btn">
                 <input name="submit" id="submit" class="button_submit" value="Сохранить траекторию" type="submit">
@@ -77,13 +77,16 @@
 </div>
 
 <script>
-  {% for active_event in active_events %}
-  
-
-  $("#{{ active_event }}").prop( "checked", true )
-
-  {% endfor %}
-
+if (!$("section").is(".event"))
+{
+    $("input.button_submit").css("display", "none")
+}
+else
+{
+    {% for active_event in active_events %}
+        $("#{{ active_event }}").prop( "checked", true )
+    {% endfor %}
+}
 </script>
 
 {% endblock %}
