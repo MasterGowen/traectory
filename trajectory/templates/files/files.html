@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% load tz %}
+{% load staticfiles %}
 
 <div class="for-footer">
   <div class="main-title">
@@ -61,7 +62,7 @@
                 {% for file in files %}
         <div class="file-item">
             <a class="file-link" href="{{ file.file.url }}">{{ file.name }}</a><p> <span>{{ file.date }}</span></p>
-            <a class="del" href="/delete/{{ file.id }}/{{ user.id }}/"><img src="/static/images/del.png"></a>
+            <a class="del" href="/notv/delete/{{ file.id }}/{{ user.id }}/"><img src="{% static "images/del.png" %}"></a>
         </div>
         {% endfor %} 
 
