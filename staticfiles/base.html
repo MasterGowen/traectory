@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="js/masha/css/masha.css">
+		<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/lea_alex.css">
+		
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>		
+    <!--[IF IE]>
+			<script type="text/javascript" src="js/masha/ierange.js"></script>
+    <![ENDIF]-->
+    <script type="text/javascript" src="js/masha/masha.min.js"></script>
+    
+    <script src="js/jquery.placeholder.js" type="text/javascript"></script>
+    <script src="js/generic.js" type="text/javascript"></script>
+		
+		<script>
+    function init_masha(){
+        MaSha.instance = new MaSha({'select_message': 'upmsg-selectable',
+                                    'validate': true,
+                                    'marker': 'marker-bar'});
+    }
+    if (window.addEventListener){
+        window.addEventListener('load', init_masha, false);
+    } else {
+        window.attachEvent('onload', init_masha);
+    }
+    </script>
+	</head>
+	<body class="info-page">
+    <div class="site">
+        <div class="section header">
+            <div class="row">
+                <div class="col">
+                    <div class="header-logo">
+                        <a href="#"><img src="images/header/logo4.png" /></a>
+                    </div>
+                    <div class="header-center">
+                        <div class="header-right">
+                            <div class="lang-switch">
+                                <a class="lang-switch-item active" href="#"><img src="images/header/lang-ru.png" /></a>
+                                <a class="lang-switch-item" href="#"><img src="images/header/lang-en.png" /></a>
+                                <div class="for-sitemap">
+                                    <a href="#"><img src="images/header/sitemap.png" /></a>
+                                    <a href="#"><img src="images/header/help2.png" class="help-icon" /></a>
+                                </div>
+                            </div>
+                            <div class="user-links">
+                                <a href="#" class="header-login button">Войти</a>
+                                <a href="#">Регистрация</a>
+                            </div>
+                        </div>
+                        <div class="header-content">
+                            <form class="header-search">
+                                <input class="header-search-input" type="text" placeholder="Поиск" /><span class="header-search-switch"><a href="#">Везде</a></span>
+                                <input class="header-search-button" type="submit" value="Найти" />
+                            </form>
+                            <ul class="submenu">
+                                <li><a href="#">Каталог сервисов</a></li>
+                                <li><a href="#">Новости</a></li>
+                                <li><a href="#">Доступ</a></li>
+                                <li><a href="#">Внешние сервисы</a></li>
+                                <li><a href="#">Сервисы УрФУ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /<div class="row"> -->
+        </div>
+    
+<div class="for-footer">
+<div class="main-title">
+                <h1><span class="in"><span>Регистрация</span></span></h1>
+            </div>
+            <div class="section breadcrumbs">
+                <div class="row">
+
+                    <div class="col3">
+                        <span class="breadcrumbs-item">
+                            <a href="/courses">Открытый университет</a>
+                        </span>
+                        <span class="divide">/</span>
+                        <span class="breadcrumbs-item">
+                            <a href="/register" class="no-underline">
+                                <span class="dotted">Регистрация для слушателя</span>
+                                <span class="breadcrumbs-arr"></span>
+                            </a>
+
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+<div class="section content">
+   <div class="row">
+      <div class="col2 lea_alex">
+                  <header>
+                    <h1 class="title">
+                      <span class="title-super">Добро пожаловать!</span>
+                    </h1>
+                  </header>
+            
+
+            <form role="form" id="register-form" method="post" data-remote="true" action="/create_account" novalidate="">
+                <input name="csrfmiddlewaretoken" value="q9DTLKJ1KSL65CzEBkRVDRWKIqmkzvzY" type="hidden">
+
+                                  <div style="display:none">
+                                    <div role="alert" class="status message">
+                                      <h3 class="message-title">We're sorry, OpenUrFU enrollment is not available in your region</h3>
+                                    </div>
+
+                                    <div role="alert" class="status message submission-error" tabindex="-1">
+                                      <h3 class="message-title">The following errors occurred while processing your registration: </h3>
+                                      <ul class="message-copy"> </ul>
+                                    </div>
+                                  </div>
+
+
+
+
+                                    <div class="group group-form group-form-requiredinformation">
+                                      <h2 class="sr">Необходимая информация</h2>
+
+
+                                      
+                                        <div class="cont-input is-focused">
+                                          <label for="email">Адрес электронной почты</label>
+                                          <input class="" id="email" name="email" value="" placeholder="пример: ivanivanov@domain.com" required="" aria-required="true" type="email">
+                                        </div>
+
+                                        <div class="cont-input">
+                                          <label for="name">Полное имя</label>
+                                          <input id="name" name="name" value="" placeholder="пример: Иван Иванов" required="" aria-required="true" aria-describedby="name-tip" type="text">
+                                        </div>
+                                        <div class="cont-input">
+                                          <label for="username">Публичное имя</label>
+                                          <input id="username" name="username" value="" placeholder="пример: IvanIvanov" required="" aria-required="true" aria-describedby="username-tip" type="text">
+                                          <span class="hint" id="username-tip">Публичное имя должно быть на английском языке без пробелов и иных символов</span>
+                                        </div>
+
+
+                                        <div class="cont-input">
+                                          <label for="password">Пароль</label>
+                                          <input id="password" name="password" value="" required="" aria-required="true" type="password">
+                                        </div>
+
+
+
+                                      
+
+                                    
+
+                                    
+                                      
+
+                                      
+                                        <div class="cont-input">
+                                            <label for="education-level">Уровень образования</label>
+                                            <select id="education-level" name="level_of_education">
+                                              <option value="">--</option>
+                                              <option value="p">Доктор наук</option>
+                                              <option value="m">Кандидат наук</option>
+                                              <option value="b">Высшее образование - подготовка кадров высшей квалификации</option>
+                                              <option value="a">Высшее образование - специалитет, магистратура</option>
+                                              <option value="hs">Высшее образование - бакалавриат</option>
+                                              <option value="jhs">Среднее профессиональное образование</option>
+                                              <option value="el">Среднее общее образование</option>
+                                              <option value="none">Нет</option>
+                                              <option value="other">Другое</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="cont-input">
+                                            <label for="gender">Пол</label>
+                                            <select id="gender" name="gender">
+                                              <option value="">--</option>
+                                              <option value="m">Мужской</option>
+                                              <option value="f">Женский</option>
+                                            </select>
+                                        </div>
+                                        
+                                        
+                                          <div class="cont-input">
+                                            <label for="yob">Год рождения</label>
+                                            <select id="yob" name="year_of_birth">
+                                              <option value="">--</option>
+                                              <option value="2005">2005</option>
+                                              <option value="2004">2004</option>
+                                              <option value="2003">2003</option>
+                                              <option value="2002">2002</option>
+                                              <option value="2001">2001</option>
+                                              <option value="2000">2000</option>
+                                              <option value="1999">1999</option>
+                                              <option value="1998">1998</option>
+                                              <option value="1997">1997</option>
+                                              <option value="1996">1996</option>
+                                              <option value="1995">1995</option>
+                                              <option value="1994">1994</option>
+                                              <option value="1993">1993</option>
+                                              <option value="1992">1992</option>
+                                              <option value="1991">1991</option>
+                                              <option value="1990">1990</option>
+                                              <option value="1989">1989</option>
+                                              <option value="1988">1988</option>
+                                              <option value="1987">1987</option>
+                                              <option value="1986">1986</option>
+                                              <option value="1985">1985</option>
+                                              <option value="1984">1984</option>
+                                              <option value="1983">1983</option>
+                                              <option value="1982">1982</option>
+                                              <option value="1981">1981</option>
+                                              <option value="1980">1980</option>
+                                              <option value="1979">1979</option>
+                                              <option value="1978">1978</option>
+                                              <option value="1977">1977</option>
+                                              <option value="1976">1976</option>
+                                              <option value="1975">1975</option>
+                                              <option value="1974">1974</option>
+                                              <option value="1973">1973</option>
+                                              <option value="1972">1972</option>
+                                              <option value="1971">1971</option>
+                                              <option value="1970">1970</option>
+                                              <option value="1969">1969</option>
+                                              <option value="1968">1968</option>
+                                              <option value="1967">1967</option>
+                                              <option value="1966">1966</option>
+                                              <option value="1965">1965</option>
+                                              <option value="1964">1964</option>
+                                              <option value="1963">1963</option>
+                                              <option value="1962">1962</option>
+                                              <option value="1961">1961</option>
+                                              <option value="1960">1960</option>
+                                              <option value="1959">1959</option>
+                                              <option value="1958">1958</option>
+                                              <option value="1957">1957</option>
+                                              <option value="1956">1956</option>
+                                              <option value="1955">1955</option>
+                                              <option value="1954">1954</option>
+                                              <option value="1953">1953</option>
+                                              <option value="1952">1952</option>
+                                              <option value="1951">1951</option>
+                                              <option value="1950">1950</option>
+                                              <option value="1949">1949</option>
+                                              <option value="1948">1948</option>
+                                              <option value="1947">1947</option>
+                                              <option value="1946">1946</option>
+                                              <option value="1945">1945</option>
+                                              <option value="1944">1944</option>
+                                              <option value="1943">1943</option>
+                                              <option value="1942">1942</option>
+                                              <option value="1941">1941</option>
+                                              <option value="1940">1940</option>
+                                              <option value="1939">1939</option>
+                                              <option value="1938">1938</option>
+                                              <option value="1937">1937</option>
+                                              <option value="1936">1936</option>
+                                              <option value="1935">1935</option>
+                                              <option value="1934">1934</option>
+                                              <option value="1933">1933</option>
+                                              <option value="1932">1932</option>
+                                              <option value="1931">1931</option>
+                                              <option value="1930">1930</option>
+                                              <option value="1929">1929</option>
+                                              <option value="1928">1928</option>
+                                              <option value="1927">1927</option>
+                                              <option value="1926">1926</option>
+                                              <option value="1925">1925</option>
+                                              <option value="1924">1924</option>
+                                              <option value="1923">1923</option>
+                                              <option value="1922">1922</option>
+                                              <option value="1921">1921</option>
+                                              <option value="1920">1920</option>
+                                              <option value="1919">1919</option>
+                                              <option value="1918">1918</option>
+                                              <option value="1917">1917</option>
+                                              <option value="1916">1916</option>
+                                            </select>
+                                          </div>
+                                        
+
+
+
+<div class="cont-input">
+                                          <label for="address-mailing">Почтовый адрес</label>
+                                          <textarea id="address-mailing" name="mailing_address" value=""></textarea>
+                                          </div>
+
+                                        <div class="cont-input">
+                                          <label for="goals">Пожалуйста, поделитесь с нами своими причинами для регистрации в Открытом университете</label>
+                                          <textarea id="goals" name="goals" value=""></textarea>
+                                        </div>
+                                      
+                                    
+
+                                    
+                                      <h2>Подтвердите свое согласие</h2>
+<div class="cont-input cont-checkbox">
+                                            <input id="tos-yes" name="terms_of_service" value="true" required="" aria-required="true" type="checkbox">
+                                            <label for="tos-yes">Я согласен с <a href="/tos" class="new-vp" tabindex="-1">Условиями предоставления услуг</a></label>
+                                          </div>
+
+<div class="cont-input cont-checkbox">
+                                            <input id="honorcode-yes" name="honor_code" value="true" type="checkbox">
+                                            
+      
+      
+                                            <label for="honorcode-yes">Я согласен с <a href="/honor" class="new-vp" tabindex="-1">Кодексом чести</a></label>
+                                          </div>
+                                    
+
+
+                                    <div class="cont-input cont-btn">
+                                       <input name="submit" id="submit" class="button action action-primary action-update" value="Регистрация + Create My Account" type="submit">
+                                    </div>
+                                  
+                                  </div></form></div>
+                                  <div class="col">
+                                      <aside role="complementary">
+
+
+
+    
+
+
+<style>
+.smaller {
+  font-size:80%;
+}
+.gray {
+  color: #333;
+}
+
+.smaller-header {
+  font-size: 20px;
+}
+.justify {
+  text-align: justify;
+  text-indent: 20px;
+}
+</style>
+
+
+<div class="smaller">
+
+<header>
+  <h3 class="sr gray">Помощь в регистрации</h3>
+</header>
+
+
+  <div class="cta cta-welcome">
+    <h3 class="gray smaller-header">Добро пожаловать в Открытый университет</h3>
+    <p class="justify">Регистрация на портале Открытого университета позволит Вам получить доступ ко всем электронным курсам.<br>
+    Ещё не выбрали свой курс? Регистрация позволит Вам получать сообщения обо всех новых курсах.</p>
+  </div>
+
+
+<div class="cta cta-nextsteps">
+  <h3 class="gray smaller-header">Следующие шаги</h3>
+    <p class="justify">Заполнив поля формы регистрации и нажав на кнопку, Вы получите электронное сообщение для активации аккаунта. Просто кликните на ссылку внутри для завершения процесса.<br> Не получили сообщение? Проверьте папку "Спам" и пометьте почту от Открытого университета как "не спам".</p>
+
+</div>
+
+
+  <div class="cta cta-help">
+    <h3 class="gray smaller-header">Нужна помощь?</h3>
+    <p class="justify">Нужна помощь в регистрации?
+      <a href="/faq">
+          Возможно, Ваша проблема уже нашла решение в ЧаВо?
+      </a>
+      <br>
+      После регистрации на большинство вопросов можно будет найти ответы в дискуссионных форумах курсов или в ЧаВо.</p>
+  </div>
+
+</div>
+
+  </aside>
+                                  
+    </div>
+  </div>
+</div> <!-- /for-footer -->
+    </div>
+    
+    <div class="section footer">
+      <div class="row">
+        <div class="col">
+          <p class="copyright"><span class="sign">©</span> ФГАОУ ВПО «УрФУ имени первого Президента России Б.Н.Ельцина»</p>
+          <p class="text-error">
+            Увидели ошибку?<br/>
+            выделите фрагмент и нажмите:<br/>
+            <span class="mark">Ctrl</span>&nbsp;+&nbsp;<span class="mark">Enter</span>
+          </p>
+        </div>
+        <div class="col phones">
+          <p>Контакт-центр:</p>
+          <p class="big">8-800-100-50-44</p>
+          <p>Звонок по России бесплатный</p>
+          <p class="big">+7(343) 375-44-44</p>
+          <p>Телефон в Екатеринбурге</p>
+          <p class="more"><a href="#" class="dashed">Телефоны служб<i class="icon-triangle-down"></i></a></p>
+        </div>
+        <div class="col">
+          <div class="social">
+            <p>Мы в социальных сетях:</p>
+            <ul>
+              <li><a href="#"><i class="icon-vk"></i>Вконтакте</a></li>
+              <li><a href="#"><i class="icon-yt"></i>YouTube</a></li>
+              <li><a href="#"><i class="icon-fb"></i>Facebook</a></li>
+              <li><a href="#"><i class="icon-tw"></i>Twitter</a></li>
+              <li><a href="#"><i class="icon-instagram"></i>Instagram</a></li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>		
+    
+    <!-- for masha.js -->
+    <div id="upmsg-selectable">
+      <div class="upmsg-selectable-inner">
+        <img src="js/masha/img/textselect/upmsg_arrow.png" alt="">
+        <p>Вы можете отметить интересные вам фрагменты текста, которые будут доступны по уникальной ссылке в адресной строке браузера.</p>
+        <a href="#" class="upmsg_closebtn"></a>
+      </div>
+    </div>
+    <a id="marker-bar" href="#" class="masha-marker-bar">
+      <span class="masha-title">Поделиться цитатой</span>
+      <span class="vk masha-social" data-pattern="http://vk.com/share.php?url={url}" title="share to VK"></span>
+      <span class="facebook masha-social" data-pattern="http://www.facebook.com/share.php?u={url}" title="share to Facebook"></span>
+      <span class="twitter masha-social" data-pattern="http://twitter.com/share?url={url}" title="tweet"></span>
+      <span class="addthis masha-social" data-pattern="" title="share to Add This+"></span>
+    </a>
+    <!-- -->
+		
+	</body>
+</html>	
+            
