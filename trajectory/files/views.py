@@ -36,6 +36,6 @@ def delete(request, pk, user_id):
 
     if userfile.user == user:
         userfile.delete()
-        return redirect('/files/' + user_id + '/')
+        return redirect('/notv/files/' + user_id + '/')
     else:
         return render(request, 'error/forbidden.html')

@@ -14,7 +14,7 @@ class User(models.Model):
     i = models.CharField("Имя", max_length=1024)
     f = models.CharField("Фамилия", max_length=1024)
     o = models.CharField("Отчество", max_length=1024)
-    city = models.CharField("Город", max_length=1024, blank=True, null=True)
+    city = models.CharField("Город", max_length=1024)
     email = models.EmailField("Электронная почта", max_length=1024)
     tel = models.CharField("Телефон", max_length=1024)
     trajectories = models.ManyToManyField(Trajectory)
@@ -25,6 +25,8 @@ class User(models.Model):
         (online, 'Заочно'),
         (offline, 'Очно')
     )
+    job = models.CharField("Должность", max_length=1024)
+    org = models.CharField("Организация", max_length=1024)
     status = models.CharField("Статус", max_length=7, choices=STATUS, default=offline)
     date = models.DateField(auto_now_add=True, blank=True)
 

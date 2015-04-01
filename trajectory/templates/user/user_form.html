@@ -6,25 +6,26 @@
 
                 <h1><span class="in"><span>Регистрация</span></span></h1>
             </div>
+
             <div class="section breadcrumbs">
                 <div class="row">
 
                     <div class="col3">
                         <span class="breadcrumbs-item">
-                            <a href="/courses">Открытый университет</a>
+                            <a href="http://notv.urfu.ru/ru">Сайт НОТВ-2015</a>
                         </span>
                         <span class="divide">/</span>
                         <span class="breadcrumbs-item">
-                            <a href="/register" class="no-underline">
-                                <span class="dotted">Регистрация для слушателя</span>
-                                <span class="breadcrumbs-arr"></span>
-                            </a>
+                            <a href="{{user.link}}" class="no-underline">
+                                <span>Регистрация</span>
+                             </a>
 
 
                         </span>
                     </div>
                 </div>
             </div>
+
 <div class="section content">
    <div class="row">
 
@@ -53,6 +54,16 @@
         <div class="cont-input">
         <label for="id_o">Отчество:</label>
         <input id="id_o" maxlength="1024" name="o" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_org">Организация:</label>
+        <input id="id_org" maxlength="1024" name="org" type="text">
+        </div>
+
+        <div class="cont-input">
+        <label for="id_job">Должность:</label>
+        <input id="id_job" maxlength="1024" name="job" type="text">
         </div>
 
         <div class="cont-input">
@@ -119,30 +130,28 @@
 <header>
   <h3 class="sr gray">Помощь в регистрации</h3>
 </header>
-
-
   <div class="cta cta-welcome">
-    <h3 class="gray smaller-header">Добро пожаловать в Открытый университет</h3>
-    <p class="justify">Регистрация на портале Открытого университета позволит Вам получить доступ ко всем электронным курсам.<br>
-    Ещё не выбрали свой курс? Регистрация позволит Вам получать сообщения обо всех новых курсах.</p>
+    <h3 class="gray smaller-header">Шаг первый</h3>
+    <p class="justify">
+      Заполните все поля формы для регистрации. После нажатия кнопки «Зарегистрироваться» вы перейдете на страницу формирования траектории посещения мероприятий конференции, а на вашу электронную почту будет отправлена персанальная ссылка на вашу траекторию.
+    </p>
   </div>
 
 
 <div class="cta cta-nextsteps">
-  <h3 class="gray smaller-header">Следующие шаги</h3>
-    <p class="justify">Заполнив поля формы регистрации и нажав на кнопку, Вы получите электронное сообщение для активации аккаунта. Просто кликните на ссылку внутри для завершения процесса.<br> Не получили сообщение? Проверьте папку "Спам" и пометьте почту от Открытого университета как "не спам".</p>
+  <h3 class="gray smaller-header">Шаг второй</h3>
+    <p class="justify">
+
+      Перейдя по вашей персональной ссылке вы сможете изменить вашу траекторию посещения мероприятий конференции, а также прикрепить или удалить документы для публикации в электронном сборнике.
+    </p>
 
 </div>
 
 
   <div class="cta cta-help">
     <h3 class="gray smaller-header">Нужна помощь?</h3>
-    <p class="justify">Нужна помощь в регистрации?
-      <a href="/faq">
-          Возможно, Ваша проблема уже нашла решение в ЧаВо?
-      </a>
-      <br>
-      После регистрации на большинство вопросов можно будет найти ответы в дискуссионных форумах курсов или в ЧаВо.</p>
+    <p class="justify">Нужна помощь в регистрации? Вы можее написать нам на <a href="mailto:notv@urfu.ru?subject=Нужна помощь в регистрации">электронную почту</a>.</p>
+    <p>Tак же вы можете нам позвонить по  номеру телефона: 8 (343) 374-58-24</p>
   </div>
 
 </div>

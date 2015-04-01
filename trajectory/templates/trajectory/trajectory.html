@@ -5,57 +5,56 @@
 
 <div class="for-footer">
   <div class="main-title">
-                <h1><span class="in"><span>Программа мероприятий</span></span></h1>
-      </div>
-            <div class="section breadcrumbs">
-                <div class="row">
-
-                    <div class="col3">
+      <h1><span class="in"><span>Программа мероприятий</span></span></h1>
+  </div>
+      <div class="section breadcrumbs">
+        <div class="row">
+            <div class="col3">
                         <span class="breadcrumbs-item">
-                            <a href="http://212.193.82.100:8099/ru">Сайт НОТВ-2015</a>
+                            <a href="http://notv.urfu.ru/ru">Сайт НОТВ-2015</a>
                         </span>
                         <span class="divide">/</span>
                         <span class="breadcrumbs-item">
-                            <a href="/register" class="no-underline">
-                                <span class="dotted">Программа мероприятий <b>{{user.link}}</b></span>
-                                <span class="breadcrumbs-arr"></span>
-                            </a>
+                            <span class="">Выбранные Вами мероприятия</span>        
+                            
 
 
                         </span>
+                        <span class="change"><a href="{{user.link}}" class="edit-link"></a></span>
                     </div>
                 </div>
             </div>
 
+<div class="section content">
+
 
   <div class="row">
     {% for program in programs %}
-    <h2>{{ program.name }}</h2>
+    <h2>По направлению "{{ program.name }}" Вы выбрали следующие мероприятия:</h2>
     <p>{{ program.comment }}</p>
 
       {% for cell in cells|sort_by:'step' %}
-        <section class="event">
+        <section class=qwerty>
 
         {% for event in cell.events.all %}
             {% if event in trajectory.events.all%}
 
-        <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}"><label for="{{ event.id }}">
-        {% if event.image %}
-        <img src="{{ event.image.url }}" />
-        {% else %}
-        <img src="http://placehold.it/290x119" />
-        {% endif %}
+
+
         <article>
           <header>
+                  {% if event.startdate %}
+              <h3>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</h3>
+            {% endif %}
+
+
             <p>{{ event.name }}</p>
           </header>
          <p>{{ event.comment }}</p>
          {% localtime on %}
-            {% if event.startdate %}
-              <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
-            {% endif %}
+
         </article>
-        </label>
+
          {% endlocaltime %}
 
             {% endif %}
@@ -70,6 +69,7 @@
 {% empty %}
 <p>No events</p>
 {% endfor %}
+</div>
 </div>
 </div>
 {% endblock %}

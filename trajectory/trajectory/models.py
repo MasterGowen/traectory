@@ -42,7 +42,7 @@ class Program(models.Model):
     name = models.CharField('Название', max_length=1024, blank=True, null=True)
     comment = models.TextField('Описание', max_length=4096, blank=True, null=True)
     payd = models.BooleanField('Платно', default=False)
-    cells = models.ManyToManyField(Cell)
+    cells = models.ManyToManyField(Cell, blank=True)
 
     def __str__(self):
         return self.name
