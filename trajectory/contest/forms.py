@@ -1,8 +1,8 @@
 from django import forms
-from .models import ContestItemRank
+from .models import ContestItem, ContestItemRank
 
 
-class ContestItemForm(forms.Form):
+class ContestItemForm(forms.ModelForm):
 
     ROUTES = (
         ('01', 'Лучший электронный курс'),
@@ -10,15 +10,18 @@ class ContestItemForm(forms.Form):
         ('03', 'Лучшая инновация в контроле знаний'),
     )
 
-    route = forms.ChoiceField(widget=forms.RadioSelect, choices=ROUTES, label="Направление")
-    organization = forms.CharField(label="Организация")
-    city = forms.CharField(label="Город")
-    authors = forms.CharField(label="Авторы")
-    email = forms.EmailField(label="Электронная почта")
-    telephone = forms.CharField(label="Телефон")
-    url = forms.CharField(label="Адрес ресурса")
-    account = forms.CharField(label="Реквизиты доступа")
-    description = forms.CharField(label="Описание основных идей", widget=forms.Textarea)
+    class Meta:
+        model = ContestItem
+        fields = [
+            'route',
+            'organization',
+            'city',
+            'authors',
+            'email',
+            'telephone',
+            'url',
+            'description',
+        ]
 
 
 class ContestItemRankForm(forms.ModelForm):
@@ -26,6 +29,7 @@ class ContestItemRankForm(forms.ModelForm):
     class Meta:
         model = ContestItemRank
         fields = [
+            'user',
             'user_rank',
             'user_comment',
         ]
