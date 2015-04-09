@@ -6,8 +6,19 @@
         <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
         <style>
             .lea{display:block; width:900px; height:auto; margin:0 auto; padding:10px; border:1px solid gray; box-shadow:0 0 2px gray;}
-            .lea .tab{display:table; width:900px; height:auto; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
-            .lea .tab la{display:table; width:900px; height:auto; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
+            .lea .tab{display:table;border-spacing: 20px 15px; width:900px; height:auto; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
+            .lea .tab input[type="radio"]{display:none; }
+            .lea .tab input[type="radio"]+label{display:table-cell; width:300px; height:250px; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
+            .lea .tab input[type="radio"]:checked+label{display:table-cell; width:300px; height:250px; margin:0 auto; padding:0px; border:4px solid gray; box-shadow:0 0 0px gray;}
+
+            
+            .lea .tab .step1 input[type="radio"]:checked + label + input + label  + input + label +.step2{display:block;}
+            .lea .tab .step1 input[type="radio"]:checked + label + input + label  +.step2{display:block;}
+            .lea .tab .step1 input[type="radio"]:checked + label +.step2{display:block;}
+
+
+            .lea .tab .step2{display: none;width:60%;height:auto; margin:20px auto; }
+            .lea .tab .step2 input {display:; width:100%; height:auto; margin:0 auto; padding:; border:1px solid gray; box-shadow:0 0 2px gray;}
 
         </style>
     </head>
@@ -16,11 +27,12 @@
         <div class="tab">
             <form action="" method="post">
                 {% csrf_token %}
-                <p>
+                <section class="step1">
                     <input id="radio01" name="route" type="radio" value="01" ><label for="radio01">Наминации01</label>
                     <input id="radio02" name="route" type="radio" value="02" ><label for="radio02">Наминации02</label>
                     <input id="radio03" name="route" type="radio" value="03" ><label for="radio03">Наминации03</label>
-                </p>
+               
+                <section class="step2">
                 <p><label for="id_organization">Организация:</label> <input id="id_organization" maxlength="1024" name="organization" type="text"></p>
                 <p><label for="id_city">Город:</label> <input id="id_city" maxlength="1024" name="city" type="text"></p>
                 <p><label for="id_authors">Авторы:</label> <input id="id_authors" maxlength="1024" name="authors" type="text"></p>
@@ -29,6 +41,10 @@
                 <p><label for="id_url">Адрес ресурса:</label> <input id="id_url" maxlength="1024" name="url" type="url"></p>
                 <p><label for="id_description">Описание основных идей:</label> <input id="id_description" maxlength="1024" name="description" type="text">  </p>
                 <input name="submit" id="submit" class="button_create" value="Отправить" type="submit">
+                </section>
+                <section class="step3">
+                </section>
+                 </section>
             </form>
         </div>
     </div>
