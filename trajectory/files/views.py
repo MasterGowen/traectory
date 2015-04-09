@@ -12,7 +12,6 @@ def user_files(request, pk):
 
     if request.method == 'POST':
         form = UserFileForm(request.POST, request.FILES)
-        print(request.FILES)
         if form.is_valid():
             file = form.save(commit=False)
             file.user = user
@@ -36,6 +35,6 @@ def delete(request, pk, user_id):
 
     if userfile.user == user:
         userfile.delete()
-        return redirect('/files/' + user_id + '/')
+        return redirect('/notv/files/' + user_id + '/')
     else:
         return render(request, 'error/forbidden.html')

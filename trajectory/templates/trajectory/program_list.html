@@ -13,7 +13,7 @@
 
                     <div class="col3">
                         <span class="breadcrumbs-item">
-                            <a href="http://notv.urfu.ru/ru">Сайт НОТВ-2015</a>
+                            <a href="http://notv.urfu.ru/ru">Главная страница</a>
                         </span>
                         <span class="divide">/</span>
                         <span class="breadcrumbs-item">
@@ -28,68 +28,69 @@
             </div>
 
 
-  <div class="row">
-    {% for program in programs %}
-    <h2>{{ program.name }}</h2>
-    <p>{{ program.comment }}</p>
-  <form action="/save/" method="post">
-    {% csrf_token %}
-  {% for cell in program.cells.all|sort_by:'step' %}
-    <section class="event">
-      
-        <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked><label for="{{ cell.id }}">
-          <p>Не участвую</p>
-        </label>
-        {% for event in cell.events.all %}
-
-        <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}"><label for="{{ event.id }}">
-        {% if event.image %}
-        <img src="{{ event.image.url }}" />
-        {% else %}
-        <img src="http://placehold.it/290x119" />
-        {% endif %}
-        <article>
-          <header>
-            <p>{{ event.name }}</p>
-          </header>
-         <p>{{ event.comment }}</p>
-         {% localtime on %}
-            {% if event.startdate %}
-              <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
-            {% endif %}
-</article>
-        </label>
-         {% endlocaltime %}
-        
-      {% endfor %}
-      </section>
-
-      
-    {% endfor %}
-
-
-
-{% empty %}
-<p>No events</p>
-{% endfor %}
-        <div class="cont-input cont-btn">
-            <input name="submit" id="submit" class="button_submit" value="Сохранить траекторию" type="submit">
-        </div>
-</form>
-
-</div>
+    <div class="row">
+        <form action="/notv/save/" method="post">
+        {% csrf_token %}
+            {% for program in programs %}
+                <h2>{{ program.name }}</h2>
+                <div>{{ program.comment|safe }}</div>
+                {% for cell in program.cells.all|sort_by:'step' %}
+                
+                    <section class="event">      
+                        <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked>
+                        <label for="{{ cell.id }}" class="not" >
+                        
+                        
+                        {% for event in cell.events.all %}
+                            <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}">
+                            <label for="{{ event.id }}" class="ev">
+                                {% if event.image %}
+                                <img src="{{ event.image.url }}" />
+                                {% else %}
+                                <img src="http://placehold.it/270x119" />
+                                {% endif %}
+                                <article>
+                                    <header>
+                                        <p>{{ event.name }}</p>
+                                    </header>
+                                    <p>{{ event.comment }}</p>
+                                    {% localtime on %}
+                                        {% if event.startdate %}
+                                            <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
+                                        {% endif %}
+                                    {% endlocaltime %}
+                                </article>
+                            </label>
+                        {% endfor %}
+                        <div><p id="status">Не участвую</p></div>
+                        </label>
+                    </section>
+                
+                {% endfor %}
+                {% empty %}
+                    <h3 class="disable">На данный момент нет ни одного мероприятия для формирования траектории</h3>
+            {% endfor %}
+            <div class="cont-input cont-btn">
+                <input name="submit" id="submit" class="button_submit" value="Сохранить траекторию" type="submit">
+            </div>
+        </form>
+    </div>
 
 
 
 </div>
 
 <script>
-  {% for active_event in active_events %}
-  
-
-  $("#{{ active_event }}").prop( "checked", true )
-
-  {% endfor %}
+if (!$("section").is(".event"))
+{
+    $("input.button_submit").css("display", "none")
+}
+else
+{
+    {% for active_event in active_events %}
+        $("#{{ active_event }}").prop( "checked", true )
+    {% endfor %}
+}
 
 </script>
 

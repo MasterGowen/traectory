@@ -31,11 +31,11 @@ def new_user(request):
             trajectory.user_id = user.id
             trajectory.save()
 
-            link = 'http://localhost/tr/' + trajectory.id + '/'
+            link = 'http://openedu.urfu.ru/notv/tr/' + trajectory.id + '/'
             user.link = link
             user.save()
             try:
-                send_mail('НОТВ 2015', 'Ваша уникальная ссылка:'+link, 'admin@notv.urfu.ru', [user.email])
+                send_mail('НОТВ 2015', 'Ваша персональная ссылка:'+ link, 'info@notv.urfu.ru', [user.email])
             except:
                 pass
             return redirect(link)

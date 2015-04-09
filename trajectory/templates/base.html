@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/lea_alex.css" %}"/>
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col">
                     <div class="header-logo">
-                        <a href="#"><img src="{% static "images/header/logo4.png" %}" /></a>
+                        <a href="http://urfu.ru/"><img src="{% static "images/header/logo4.png" %}" /></a>
                     </div>
                     <div class="header-center">
                         <div class="header-right">
@@ -51,12 +51,12 @@
                                 <input class="header-search-input" type="text" placeholder="Поиск" /><span class="header-search-switch"><a href="#">Везде</a></span>
                                 <input class="header-search-button" type="submit" value="Найти" />
                             </form>
-                            <ul class="submenu">
-
-                                <li class=""><a href="http://notv.urfu.ru/ru/article/ks">Круглые столы</a></li>
-                                <li class=""><a href="http://notv.urfu.ru/ru/article/mk2">Мастер-классы</a></li>
-                    
-                            </ul>
+<ul class="submenu">
+                            <li class=""><a href="http://notv.urfu.ru/ru/article/conference_program">Программа конференции</a></li>
+                            <li class=""><a href="http://notv.urfu.ru/ru/article/mk">Мастер-классы</a></li>
+                            <li class=""><a href="http://notv.urfu.ru/ru/article/ks">Круглые столы</a></li>
+                            <li class=""><a href="http://notv.urfu.ru/ru/article/contacts">Контакты</a></li>
+                                            </ul>
                         </div>
                     </div>
                     <div class="userpanel" style="display:none">
@@ -69,7 +69,7 @@
                                     <a href="{{user.link}}" class="edit-link"></a>
                                 </fieldset>
                             </form>
-                            <p><a href="/files/{{ user.id }}/">Файлы для публикации</a></p>
+                            <p><a href="../../files/{{ user.id }}/">Файлы для публикации</a></p>
                         </div>
 
                     </div>
@@ -86,19 +86,16 @@
                 <div class="row">
                     <div class="col">
                         <p class="copyright"><span class="sign">©</span> ФГАОУ ВПО «УрФУ имени первого Президента России Б.Н.Ельцина»</p>
-                        <p class="text-error">
-                        Увидели ошибку?<br/>
-                        выделите фрагмент и нажмите:<br/>
-                        <span class="mark">Ctrl</span>&nbsp;+&nbsp;<span class="mark">Enter</span>
-                        </p>
+
                     </div>
                     <div class="col phones">
-                        <p>Контакт-центр:</p>
-                        <p class="big">8-800-100-50-44</p>
-                        <p>Звонок по России бесплатный</p>
-                        <p class="big">+7(343) 375-44-44</p>
-                        <p>Телефон в Екатеринбурге</p>
-                        <p class="more"><a href="#" class="dashed">Телефоны служб<i class="icon-triangle-down"></i></a></p>
+                        <p>Почта конференции:</p>
+                        <p class="big">notv@urfu.ru</p>
+                        <p>&nbsp;</p>
+                        <p>Телефон конференции:</p>
+                        <p class="big">8 (343) 374-58-24</p>
+                        
+                        
                     </div>
                     <div class="col">
                         <div class="social">

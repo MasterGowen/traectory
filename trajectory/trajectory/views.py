@@ -8,6 +8,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .models import Program, Trajectory, Cell
 from ..user.models import User
 from ..event.models import Event
+from ..files.models import UserFile
 
 
 def trajectory_view(request, pk):
@@ -71,7 +72,9 @@ def trajectory_save(request):
 @staff_member_required
 def stats(request):
     event_users = {}
+    event_users_status = {}
     event_users.clear()
+    event_users_status.clear()
     events = Event.objects.all()
     for event in events:
         users_ids = []
@@ -81,10 +84,26 @@ def stats(request):
         users = User.objects.filter(pk__in=users_ids)
         event_users[event] = users
 
-    number_users = len(User.objects.all())
+        for user in users:
+            event_users_status[event.id].append(user.status)
+        event_users_status_json = json.dumps(event_users_status)
+
+    number_users = User.objects.count()
+    number_files = UserFile.objects.count()
+    users = User.objects.order_by('f')
+
+    userfiles = {}
+
+    for user in users:
+        files = UserFile.objects.filter(user=user)
+        userfiles[user.id] = files
 
     return render(request, 'trajectory/stats.html', {
         'event_users': event_users,
         'number_users': number_users,
-
-    })
+        'users': users,
+        'userfiles': userfiles,
+        'number_files': number_files,
+        'event_users_status_json': event_users_status_json,
+        }
+    )
