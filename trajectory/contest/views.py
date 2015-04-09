@@ -17,7 +17,7 @@ def create_contest_item(request):
             contest_item = form.save(commit=False)
             contest_item.save()
 
-            return redirect('results')
+            return render(request, 'contest/thanks.html')
 
     args = {}
     args.update(csrf(request))
