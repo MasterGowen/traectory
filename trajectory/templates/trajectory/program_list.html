@@ -48,6 +48,7 @@
                                 <img src="{{ event.image.url }}" />
                                 {% else %}
                                 <img src="http://placehold.it/270x119" />
+
                                 {% endif %}
                                 <article>
                                     <header>
@@ -91,7 +92,6 @@ else
         $("#{{ active_event }}").prop( "checked", true )
     {% endfor %}
 }
-
 </script>
 
 {% endblock %}

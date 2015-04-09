@@ -104,6 +104,7 @@ $RECYCLE.BIN/
 .idea
 
 media/
+staticfiles/
 trajectory/event/migrations/
 trajectory/files/migrations/
 trajectory/user/migrations/
