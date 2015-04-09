@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'z_2eluh=_ip@7-y#0u4c(nqn5^8iznc(2nx*-s#^4h=x!5yji6'
 
-DEBUG = False
+DEBUG = True
 DEBUG404 = True
 
 TEMPLATE_DEBUG = False
@@ -23,6 +23,7 @@ INSTALLED_APPS += (
     'trajectory.event',
     'trajectory.trajectory',
     'trajectory.files',
+    'trajectory.contest',
 )
 
 MIDDLEWARE_CLASSES = (

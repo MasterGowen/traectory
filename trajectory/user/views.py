@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.core.context_processors import csrf
 from django.utils import timezone
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
 from django.core.mail import send_mail
 
 from .models import User
@@ -35,7 +34,7 @@ def new_user(request):
             user.link = link
             user.save()
             try:
-                send_mail('НОТВ 2015', 'Ваша персональная ссылка:'+ link, 'info@notv.urfu.ru', [user.email])
+                send_mail('НОТВ 2015', 'Ваша персональная ссылка:'+link, 'info@notv.urfu.ru', [user.email])
             except:
                 pass
             return redirect(link)
