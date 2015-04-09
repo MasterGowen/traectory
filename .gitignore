@@ -109,3 +109,4 @@ trajectory/event/migrations/
 trajectory/files/migrations/
 trajectory/user/migrations/
 trajectory/trajectory/migrations/
+trajectory/contest/migrations/
