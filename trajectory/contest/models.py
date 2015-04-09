@@ -28,7 +28,7 @@ class ContestItem(models.Model):
     )
 
     route = models.CharField(
-        "Направление",
+        "Номинация",
         max_length=2,
         choices=ROUTES
     )
