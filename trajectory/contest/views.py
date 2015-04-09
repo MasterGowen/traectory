@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
+from django.http import HttpResponse
+
 from .models import ContestItem, ContestItemRank
 from .forms import ContestItemForm, ContestItemRankForm
 
@@ -18,6 +20,10 @@ def create_contest_item(request):
             contest_item.save()
 
             return render(request, 'contest/thanks.html')
+        else:
+            return HttpResponse('Invalid form')
+    else:
+        return HttpResponse('Invalid method')
 
     args = {}
     args.update(csrf(request))
