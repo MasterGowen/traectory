@@ -3,6 +3,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.views.generic.list import ListView
 
 from django.http import HttpResponse
 
@@ -34,7 +35,7 @@ def create_contest_item(request):
 def read_contest_item_all(request):
     contest_items = ContestItem.objects.all()
     return render(request, 'contest/contest_list.html', {
-        'contest_items': contest_items,
+        "contest_items": contest_items
     })
 
 
@@ -65,4 +66,3 @@ def create_contest_item_rank(request):
             contest_item_rank.user = User.objects.get(pr=request.user.id)
             contest_item_rank.save()
             return redirect('http://notv.urfu.ru/')
-

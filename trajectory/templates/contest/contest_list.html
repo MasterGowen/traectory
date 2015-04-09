@@ -5,6 +5,26 @@
     <title></title>
 </head>
 <body>
-{{contest_items}}
+
+{% for contest_item in contest_items %}
+<article style="background-color:#EEE;">
+    <p>{{contest_item.route}}</p>
+    <p>{{contest_item.organization}}</p>
+    <p>{{contest_item.city}}</p>
+    <p>{{contest_item.authors}}</p>
+    <p>{{contest_item.email}}</p>
+    <p>{{contest_item.telephone}}</p>
+    <p>{{contest_item.url}}</p>
+    <p>{{contest_item.account}}</p>
+    <p>{{contest_item.description}}</p>
+<span style="color:grey;">И тут будут поля под оценки и комментарии экспертов...</span>
+</article>
+{% endfor %}
+
 </body>
+<style>
+    article > p {
+    padding:0 0 0 1em;
+    }
+    </style>
 </html>
