@@ -22,9 +22,9 @@ class ContestItemRank(models.Model):
 class ContestItem(models.Model):
 
     ROUTES = (
-        ('01', '01'),
-        ('02', '02'),
-        ('03', '03'),
+        ('01', 'Лучший электронный курс'),
+        ('02', 'Лучшее визуальное оформление курса'),
+        ('03', 'Лучшая инновация в контроле знаний'),
     )
 
     route = models.CharField(
