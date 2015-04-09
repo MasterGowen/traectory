@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head lang="ru">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-</head>
-<body>
-<center>
-<h1>CONTEST</h1>
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
+    <head lang="ru">
+        <meta charset="UTF-8">
+        <title></title>
+        <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+        <style>
+            .lea{display:block; width:900px; height:auto; margin:0 auto; padding:10px; border:1px solid gray; box-shadow:0 0 2px gray;}
+            .lea .tab{display:table; width:900px; height:auto; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
+            .lea .tab la{display:table; width:900px; height:auto; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
 
-    <div>
-        <input name="submit" id="submit" class="button_create" value="Отправить" type="submit">
+        </style>
+    </head>
+    <body>
+    <div class="lea">
+        <div class="tab">
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>
+                    <input id="radio01" name="route" type="radio" value="01" ><label for="radio01">Наминации01</label>
+                    <input id="radio02" name="route" type="radio" value="02" ><label for="radio02">Наминации02</label>
+                    <input id="radio03" name="route" type="radio" value="03" ><label for="radio03">Наминации03</label>
+                </p>
+                <p><label for="id_organization">Организация:</label> <input id="id_organization" maxlength="1024" name="organization" type="text"></p>
+                <p><label for="id_city">Город:</label> <input id="id_city" maxlength="1024" name="city" type="text"></p>
+                <p><label for="id_authors">Авторы:</label> <input id="id_authors" maxlength="1024" name="authors" type="text"></p>
+                <p><label for="id_email">Электронная почта:</label> <input id="id_email" maxlength="1024" name="email" type="email"></p>
+                <p><label for="id_telephone">Контактный телефон:</label> <input id="id_telephone" maxlength="1024" name="telephone" type="text"></p>
+                <p><label for="id_url">Адрес ресурса:</label> <input id="id_url" maxlength="1024" name="url" type="url"></p>
+                <p><label for="id_description">Описание основных идей:</label> <input id="id_description" maxlength="1024" name="url" type="url">  </p>
+                <input name="submit" id="submit" class="button_create" value="Отправить" type="submit">
+            </form>
+        </div>
     </div>
 
-</form>
-    </center>
 </body>
 <script>
-    tinyMCE.init({selector: '#id_description',
-                 menubar : false}
-                 );
+tinyMCE.init({selector: '#id_description',
+menubar : false}
+);
 </script>
 </html>
