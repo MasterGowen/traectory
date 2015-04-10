@@ -23,9 +23,6 @@ def create_contest_item(request):
             return render(request, 'contest/thanks.html')
         else:
             return HttpResponse('Invalid form')
-    else:
-        return HttpResponse('Invalid method')
-
     args = {}
     args.update(csrf(request))
     args['form'] = ContestItemForm()
