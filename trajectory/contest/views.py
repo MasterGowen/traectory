@@ -3,7 +3,6 @@ from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.views.generic.list import ListView
 
 from django.http import HttpResponse
 
@@ -52,7 +51,7 @@ def delete_contest_item(request, id):
 
 
 @login_required()
-def create_contest_item_rank(request):
+def create_contest_item_rank(request, pk):
 
     if request.method == 'POST':
         form = ContestItemRankForm(request.POST)
@@ -62,4 +61,12 @@ def create_contest_item_rank(request):
 
             contest_item_rank.user = User.objects.get(pr=request.user.id)
             contest_item_rank.save()
+
+            contest_item = ContestItem.objects.get(pk=pk)
+            contest_item.rank.add(contest_item_rank)
+
             return redirect('http://notv.urfu.ru/')
+    args = {}
+    args.update(csrf(request))
+    args['form'] = ContestItemRankForm()
+    return render(request, 'contest/rank.html', args)
