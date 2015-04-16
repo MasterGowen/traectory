@@ -5,54 +5,352 @@
         <title></title>
         <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
         <style>
-            .lea{display:block; width:900px; height:auto; margin:0 auto; padding:10px; border:1px solid gray; box-shadow:0 0 2px gray;}
-            .lea .tab{display:table;border-spacing: 20px 15px; width:900px; height:auto; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
-            .lea .tab input[type="radio"]{display:none; }
-            .lea .tab input[type="radio"]+label{display:table-cell; width:300px; height:250px; margin:0 auto; padding:0px; border:1px solid gray; box-shadow:0 0 0px gray;}
-            .lea .tab input[type="radio"]:checked+label{display:table-cell; width:300px; height:250px; margin:0 auto; padding:0px; border:4px solid gray; box-shadow:0 0 0px gray;}
 
-            
-            .lea .tab .step1 input[type="radio"]:checked + label + input + label  + input + label +.step2{display:block;}
-            .lea .tab .step1 input[type="radio"]:checked + label + input + label  +.step2{display:block;}
-            .lea .tab .step1 input[type="radio"]:checked + label +.step2{display:block;}
-
-
-            .lea .tab .step2{display: none;width:60%;height:auto; margin:20px auto; }
-            .lea .tab .step2 input {display:; width:100%; height:auto; margin:0 auto; padding:; border:1px solid gray; box-shadow:0 0 2px gray;}
-
+        input[type="radio"]{display:none;}
+        input[type="radio"]+label{display:inline-block; width:200px; height:200px; margin:0 auto; padding:0px; border: 1px solid gray; background-color:#FFF; }
+        input[type="radio"]:checked+label{box-shadow: 0 0 4px grey;background-color:gold;}
+        
+        input[type="radio"]+label svg{margin:15px 68px 0;}
+        input[type="radio"]+label p{text-align: center}
+        
+        body { font-family:Lucida Sans, Arial, Helvetica, Sans-Serif; font-size:13px; margin:20px;}
+        #main { width:635px; margin: 0px auto; border:solid 1px #b2b3b5; -moz-border-radius:10px; padding:20px; background-color:#f6f6f6;}
+        #header { text-align:center; border-bottom:solid 1px #b2b3b5; margin: 0 0 20px 0; }
+        fieldset { border:none; ;}
+        legend { font-size:18px; margin:0px; padding:10px 0px; color:#b0232a; font-weight:bold;}
+        label { display:block; margin:15px 0 5px;}
+        input[type=text], input[type=password], input[type=email], input[type=url]{ width:602px; padding:5px; border:solid 1px gray;}
+        input[type=submit]{ width:617px; padding:5px; border:solid 1px gray;}
+        .prev, .next { background-color:#b0232a; padding:5px 10px; color:#fff; text-decoration:none;}
+        .prev:hover, .next:hover { background-color:#000; text-decoration:none;}
+        .prev { float:left;}
+        .next { float:right;}
+        #steps { list-style:none; width:100%; overflow:hidden; margin:0px; padding:0px;}
+        #steps li {font-size:24px; float:left; padding:10px; color:#b0b1b3;}
+        #steps li span {font-size:11px; display:block;}
+        #steps li.current { color:#000;}
+        #makeWizard { background-color:#b0232a; color:#fff; padding:5px 10px; text-decoration:none; font-size:18px;}
+        #makeWizard:hover { background-color:#000;}
+        
+        
         </style>
-    </head>
-    <body>
-    <div class="lea">
-        <div class="tab">
-            <form action="" method="post">
-                {% csrf_token %}
-                <section class="step1">
-                    <input id="radio01" name="route" type="radio" value="01" ><label for="radio01">Наминации01</label>
-                    <input id="radio02" name="route" type="radio" value="02" ><label for="radio02">Наминации02</label>
-                    <input id="radio03" name="route" type="radio" value="03" ><label for="radio03">Наминации03</label>
-               
-                <section class="step2">
-                <p><label for="id_organization">Организация:</label> <input id="id_organization" maxlength="1024" name="organization" type="text"></p>
-                <p><label for="id_city">Город:</label> <input id="id_city" maxlength="1024" name="city" type="text"></p>
-                <p><label for="id_authors">Авторы:</label> <input id="id_authors" maxlength="1024" name="authors" type="text"></p>
-                <p><label for="id_email">Электронная почта:</label> <input id="id_email" maxlength="1024" name="email" type="email"></p>
-                <p><label for="id_telephone">Контактный телефон:</label> <input id="id_telephone" maxlength="1024" name="telephone" type="text"></p>
-                <p><label for="id_url">Адрес ресурса:</label> <input id="id_url" maxlength="1024" name="url" type="url"></p>
-                <p><label for="id_description">Описание основных идей:</label> <input id="id_description" maxlength="1024" name="description" type="text">  </p>
-                <input name="submit" id="submit" class="button_create" value="Отправить" type="submit">
-                </section>
-                <section class="step3">
-                </section>
-                 </section>
-            </form>
-        </div>
-    </div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+        <script>
+        (function($) {
+        $.fn.formToWizard = function(options) {
+        options = $.extend({
+        submitButton: '',
+        }, options);
+        
+        var element = this;
+        var steps = $(element).find("fieldset");
+        var count = steps.size();
+        var submmitButtonName = "#" + options.submitButton;
+        $(submmitButtonName).hide();
+        // 2
+    $(element).before("<ul id='steps'></ul>");
+    steps.each(function(i) {
+    $(this).wrap("<div id='step" + i + "'></div>");
+    $(this).append("<p id='step" + i + "commands'></p>");
+    // 2
+    var name = $(this).find("legend").html();
+    $("#steps").append("<li id='stepDesc" + i + "'>Шаг " + (i + 1) + "<span>" + name + "</span></li>");
+    if (i == 0) {
+    createNextButton(i);
+    selectStep(i);
+    }
+    else if (i == count - 1) {
+    $("#step" + i).hide();
+    createPrevButton(i);
+    }
+    else {
+    $("#step" + i).hide();
+    createPrevButton(i);
+    createNextButton(i);
+    }
+    });
+    function createPrevButton(i) {
+    var stepName = "step" + i;
+    $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='prev'>< Назад</a>");
+    $("#" + stepName + "Prev").bind("click", function(e) {
+    $("#" + stepName).hide();
+    $("#step" + (i - 1)).show();
+    $(submmitButtonName).hide();
+    selectStep(i - 1);
+    });
+    }
+    function createNextButton(i) {
+    var stepName = "step" + i;
+    $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Вперед ></a>");
+    $("#" + stepName + "Next").bind("click", function(e) {
+    $("#" + stepName).hide();
+    $("#step" + (i + 1)).show();
+    if (i + 2 == count)
+    $(submmitButtonName).show();
+    selectStep(i + 1);
+    });
+    }
+    function selectStep(i) {
+    $("#steps li").removeClass("current");
+    $("#stepDesc" + i).addClass("current");
+    }
+    }
+    })(jQuery);
+    </script>
 
+</head>
+<body>
+    <div id="main">
+
+        <form id="SignupForm" action="" method="post">
+            {% csrf_token %}
+            <fieldset class="step1">
+                <legend>Выбирите направление</legend>
+                
+                <input id="radio01" name="route" type="radio" value="01" >
+                <label for="radio01">
+                    <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    width="64px" height="89px" viewBox="0 0 64 89" enable-background="new 0 0 64 89" xml:space="preserve">
+                    <g>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="7.628,83.49 18.115,76.928
+                    22.351,88.551 34.596,52.916 19.873,47.857   "/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="55.273,83.99 44.926,77.207
+                    40.447,88.74 28.952,52.857 43.775,48.107    "/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="32.355,0.26 35.67,3.697
+                    39.738,1.202 42.17,5.309 46.705,3.82 48.123,8.378 52.879,7.976 53.211,12.737 57.932,13.442 57.154,18.152 61.584,19.927
+                    59.742,24.331 63.645,27.079 60.838,30.938 64,34.513 60.377,37.621 62.631,41.829 58.389,44.019 59.611,48.633 54.98,49.787
+                    55.105,54.557 50.332,54.609 49.355,59.281 44.697,58.232 42.668,62.553 38.379,60.455 35.408,64.193 31.718,61.166 27.966,64.115
+                    25.073,60.316 20.742,62.322 18.803,57.963 14.126,58.912 13.245,54.223 8.474,54.07 8.698,49.301 4.092,48.053 5.41,43.466
+                    1.216,41.188 3.557,37.028 0,33.845 3.236,30.338 0.509,26.419 4.469,23.752 2.719,19.311 7.187,17.629 6.507,12.905
+                    11.243,12.298 11.671,7.545 16.418,8.046 17.934,3.52 22.437,5.103 24.954,1.047 28.97,3.626   "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" d="M59.205,32.389
+                    c-0.158,15.154-12.57,27.309-27.723,27.152c-15.15-0.16-27.306-12.572-27.147-27.726C4.493,16.665,16.905,4.509,32.057,4.667
+                    C47.207,4.826,59.365,17.237,59.205,32.389z"/>
+                    <circle fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" cx="31.771" cy="32.103" r="22.891"/>
+                    <g>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="32.912,30.078 42.334,30.078
+                    37.625,25.367       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M52.977,40.72
+                    c1.051-2.59,1.652-5.414,1.684-8.377c0.006-0.765-0.025-1.52-0.09-2.265H42.334L52.977,40.72z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="30.273,18.017 30.273,30.078
+                    32.912,30.078 37.625,25.367         "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M42.334,30.078H54.57
+                    c-0.502-5.725-3.117-10.852-7.064-14.593l-9.881,9.882L42.334,30.078z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="30.273,32.719 32.912,30.078
+                    30.273,30.078       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,30.078H8.976
+                    c-0.05,0.591-0.088,1.184-0.095,1.785c-0.064,6.184,2.333,11.813,6.272,15.977l15.12-15.121V30.078z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M42.334,30.078h-9.422l-2.639,2.641
+                    v22.225c0.416,0.027,0.834,0.045,1.258,0.049c9.676,0.104,18.008-5.82,21.445-14.272L42.334,30.078z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M15.153,47.84
+                    c3.848,4.061,9.167,6.719,15.12,7.104V32.719L15.153,47.84z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,18.017l-7.124-7.123
+                    c-7.763,3.159-13.408,10.46-14.174,19.185h21.298V18.017z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,9.269
+                    c-2.503,0.161-4.9,0.72-7.124,1.625l7.124,7.123V9.269z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M37.625,25.367l9.881-9.882
+                    c-4.045-3.832-9.486-6.208-15.496-6.271c-0.583-0.006-1.162,0.017-1.736,0.054v8.748L37.625,25.367z"/>
+                    </g>
+                    <g opacity="0.46">
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="32.637,29.947 41.982,28.719
+                    36.695,24.661       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M53.918,37.879
+                    c0.707-2.704,0.932-5.581,0.576-8.524c-0.092-0.757-0.221-1.503-0.383-2.233l-12.129,1.598L53.918,37.879z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="28.447,18.333 30.021,30.292
+                    32.637,29.947 36.695,24.661         "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M41.982,28.719l12.129-1.598
+                    c-1.244-5.611-4.504-10.353-8.908-13.547l-8.508,11.086L41.982,28.719z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="30.367,32.909 32.637,29.947
+                    30.021,30.292       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M30.021,30.292L8.907,33.07
+                    c0.026,0.592,0.066,1.184,0.139,1.781c0.743,6.139,3.854,11.41,8.302,15.02l13.02-16.962L30.021,30.292z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M41.982,28.719l-9.345,1.229l-2.27,2.962
+                    l2.899,22.034c0.416-0.027,0.833-0.066,1.251-0.117c9.607-1.16,17.098-8.119,19.4-16.947L41.982,28.719z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M17.348,49.871
+                    c4.345,3.527,9.966,5.469,15.919,5.072l-2.899-22.034L17.348,49.871z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M28.447,18.333l-7.99-6.133
+                    C13.173,16.344,8.528,24.32,8.907,33.07l21.115-2.778L28.447,18.333z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M27.307,9.658
+                    c-2.461,0.487-4.765,1.354-6.85,2.542l7.99,6.133L27.307,9.658z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M36.695,24.661l8.508-11.086
+                    c-4.51-3.271-10.215-4.917-16.181-4.196c-0.582,0.072-1.15,0.169-1.715,0.28l1.14,8.674L36.695,24.661z"/>
+                    </g>
+                    </g>
+                    </svg>
+                <p>Лучший<br /> электронный курс</p>
+                </label>
+                <input id="radio02" name="route" type="radio" value="02" >
+                <label for="radio02">
+                    <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    width="64px" height="89px" viewBox="0 0 64 89" enable-background="new 0 0 64 89" xml:space="preserve">
+                    <g>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="7.628,83.49 18.115,76.928
+                    22.351,88.551 34.596,52.916 19.873,47.857   "/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="55.273,83.99 44.926,77.207
+                    40.447,88.74 28.952,52.857 43.775,48.107    "/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="32.355,0.26 35.67,3.697
+                    39.738,1.202 42.17,5.309 46.705,3.82 48.123,8.378 52.879,7.976 53.211,12.737 57.932,13.442 57.154,18.152 61.584,19.927
+                    59.742,24.331 63.645,27.079 60.838,30.938 64,34.513 60.377,37.621 62.631,41.829 58.389,44.019 59.611,48.633 54.98,49.787
+                    55.105,54.557 50.332,54.609 49.355,59.281 44.697,58.232 42.668,62.553 38.379,60.455 35.408,64.193 31.718,61.166 27.966,64.115
+                    25.073,60.316 20.742,62.322 18.803,57.963 14.126,58.912 13.245,54.223 8.474,54.07 8.698,49.301 4.092,48.053 5.41,43.466
+                    1.216,41.188 3.557,37.028 0,33.845 3.236,30.338 0.509,26.419 4.469,23.752 2.719,19.311 7.187,17.629 6.507,12.905
+                    11.243,12.298 11.671,7.545 16.418,8.046 17.934,3.52 22.437,5.103 24.954,1.047 28.97,3.626   "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" d="M59.205,32.389
+                    c-0.158,15.154-12.57,27.309-27.723,27.152c-15.15-0.16-27.306-12.572-27.147-27.726C4.493,16.665,16.905,4.509,32.057,4.667
+                    C47.207,4.826,59.365,17.237,59.205,32.389z"/>
+                    <circle fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" cx="31.771" cy="32.103" r="22.891"/>
+                    <g>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="32.912,30.078 42.334,30.078
+                    37.625,25.367       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M52.977,40.72
+                    c1.051-2.59,1.652-5.414,1.684-8.377c0.006-0.765-0.025-1.52-0.09-2.265H42.334L52.977,40.72z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="30.273,18.017 30.273,30.078
+                    32.912,30.078 37.625,25.367         "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M42.334,30.078H54.57
+                    c-0.502-5.725-3.117-10.852-7.064-14.593l-9.881,9.882L42.334,30.078z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="30.273,32.719 32.912,30.078
+                    30.273,30.078       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,30.078H8.976
+                    c-0.05,0.591-0.088,1.184-0.095,1.785c-0.064,6.184,2.333,11.813,6.272,15.977l15.12-15.121V30.078z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M42.334,30.078h-9.422l-2.639,2.641
+                    v22.225c0.416,0.027,0.834,0.045,1.258,0.049c9.676,0.104,18.008-5.82,21.445-14.272L42.334,30.078z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M15.153,47.84
+                    c3.848,4.061,9.167,6.719,15.12,7.104V32.719L15.153,47.84z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,18.017l-7.124-7.123
+                    c-7.763,3.159-13.408,10.46-14.174,19.185h21.298V18.017z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,9.269
+                    c-2.503,0.161-4.9,0.72-7.124,1.625l7.124,7.123V9.269z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M37.625,25.367l9.881-9.882
+                    c-4.045-3.832-9.486-6.208-15.496-6.271c-0.583-0.006-1.162,0.017-1.736,0.054v8.748L37.625,25.367z"/>
+                    </g>
+                    <g opacity="0.46">
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="32.637,29.947 41.982,28.719
+                    36.695,24.661       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M53.918,37.879
+                    c0.707-2.704,0.932-5.581,0.576-8.524c-0.092-0.757-0.221-1.503-0.383-2.233l-12.129,1.598L53.918,37.879z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="28.447,18.333 30.021,30.292
+                    32.637,29.947 36.695,24.661         "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M41.982,28.719l12.129-1.598
+                    c-1.244-5.611-4.504-10.353-8.908-13.547l-8.508,11.086L41.982,28.719z"/>
+                    <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="30.367,32.909 32.637,29.947
+                    30.021,30.292       "/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M30.021,30.292L8.907,33.07
+                    c0.026,0.592,0.066,1.184,0.139,1.781c0.743,6.139,3.854,11.41,8.302,15.02l13.02-16.962L30.021,30.292z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M41.982,28.719l-9.345,1.229l-2.27,2.962
+                    l2.899,22.034c0.416-0.027,0.833-0.066,1.251-0.117c9.607-1.16,17.098-8.119,19.4-16.947L41.982,28.719z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M17.348,49.871
+                    c4.345,3.527,9.966,5.469,15.919,5.072l-2.899-22.034L17.348,49.871z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M28.447,18.333l-7.99-6.133
+                    C13.173,16.344,8.528,24.32,8.907,33.07l21.115-2.778L28.447,18.333z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M27.307,9.658
+                    c-2.461,0.487-4.765,1.354-6.85,2.542l7.99,6.133L27.307,9.658z"/>
+                    <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M36.695,24.661l8.508-11.086
+                    c-4.51-3.271-10.215-4.917-16.181-4.196c-0.582,0.072-1.15,0.169-1.715,0.28l1.14,8.674L36.695,24.661z"/>
+                    </g>
+                    </g>
+                    </svg>
+                <p>Лучшее<br /> визуальное оформление курса</p>
+                </label>
+                <input id="radio03" name="route" type="radio" value="03" >
+                <label for="radio03">
+                    <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                width="64px" height="89px" viewBox="0 0 64 89" enable-background="new 0 0 64 89" xml:space="preserve">
+                <g>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="7.628,83.49 18.115,76.928
+                22.351,88.551 34.596,52.916 19.873,47.857   "/>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="55.273,83.99 44.926,77.207
+                40.447,88.74 28.952,52.857 43.775,48.107    "/>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" points="32.355,0.26 35.67,3.697
+                39.738,1.202 42.17,5.309 46.705,3.82 48.123,8.378 52.879,7.976 53.211,12.737 57.932,13.442 57.154,18.152 61.584,19.927
+                59.742,24.331 63.645,27.079 60.838,30.938 64,34.513 60.377,37.621 62.631,41.829 58.389,44.019 59.611,48.633 54.98,49.787
+                55.105,54.557 50.332,54.609 49.355,59.281 44.697,58.232 42.668,62.553 38.379,60.455 35.408,64.193 31.718,61.166 27.966,64.115
+                25.073,60.316 20.742,62.322 18.803,57.963 14.126,58.912 13.245,54.223 8.474,54.07 8.698,49.301 4.092,48.053 5.41,43.466
+                1.216,41.188 3.557,37.028 0,33.845 3.236,30.338 0.509,26.419 4.469,23.752 2.719,19.311 7.187,17.629 6.507,12.905
+                11.243,12.298 11.671,7.545 16.418,8.046 17.934,3.52 22.437,5.103 24.954,1.047 28.97,3.626   "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" d="M59.205,32.389
+                c-0.158,15.154-12.57,27.309-27.723,27.152c-15.15-0.16-27.306-12.572-27.147-27.726C4.493,16.665,16.905,4.509,32.057,4.667
+                C47.207,4.826,59.365,17.237,59.205,32.389z"/>
+                <circle fill="#F6921E" stroke="#FFFFFF" stroke-width="1.1309" stroke-miterlimit="10" cx="31.771" cy="32.103" r="22.891"/>
+                <g>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="32.912,30.078 42.334,30.078
+                37.625,25.367       "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M52.977,40.72
+                c1.051-2.59,1.652-5.414,1.684-8.377c0.006-0.765-0.025-1.52-0.09-2.265H42.334L52.977,40.72z"/>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="30.273,18.017 30.273,30.078
+                32.912,30.078 37.625,25.367         "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M42.334,30.078H54.57
+                c-0.502-5.725-3.117-10.852-7.064-14.593l-9.881,9.882L42.334,30.078z"/>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" points="30.273,32.719 32.912,30.078
+                30.273,30.078       "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,30.078H8.976
+                c-0.05,0.591-0.088,1.184-0.095,1.785c-0.064,6.184,2.333,11.813,6.272,15.977l15.12-15.121V30.078z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M42.334,30.078h-9.422l-2.639,2.641
+                v22.225c0.416,0.027,0.834,0.045,1.258,0.049c9.676,0.104,18.008-5.82,21.445-14.272L42.334,30.078z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M15.153,47.84
+                c3.848,4.061,9.167,6.719,15.12,7.104V32.719L15.153,47.84z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,18.017l-7.124-7.123
+                c-7.763,3.159-13.408,10.46-14.174,19.185h21.298V18.017z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M30.273,9.269
+                c-2.503,0.161-4.9,0.72-7.124,1.625l7.124,7.123V9.269z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="0.5654" stroke-miterlimit="10" d="M37.625,25.367l9.881-9.882
+                c-4.045-3.832-9.486-6.208-15.496-6.271c-0.583-0.006-1.162,0.017-1.736,0.054v8.748L37.625,25.367z"/>
+                </g>
+                <g opacity="0.46">
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="32.637,29.947 41.982,28.719
+                36.695,24.661       "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M53.918,37.879
+                c0.707-2.704,0.932-5.581,0.576-8.524c-0.092-0.757-0.221-1.503-0.383-2.233l-12.129,1.598L53.918,37.879z"/>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="28.447,18.333 30.021,30.292
+                32.637,29.947 36.695,24.661         "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M41.982,28.719l12.129-1.598
+                c-1.244-5.611-4.504-10.353-8.908-13.547l-8.508,11.086L41.982,28.719z"/>
+                <polygon fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" points="30.367,32.909 32.637,29.947
+                30.021,30.292       "/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M30.021,30.292L8.907,33.07
+                c0.026,0.592,0.066,1.184,0.139,1.781c0.743,6.139,3.854,11.41,8.302,15.02l13.02-16.962L30.021,30.292z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M41.982,28.719l-9.345,1.229l-2.27,2.962
+                l2.899,22.034c0.416-0.027,0.833-0.066,1.251-0.117c9.607-1.16,17.098-8.119,19.4-16.947L41.982,28.719z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M17.348,49.871
+                c4.345,3.527,9.966,5.469,15.919,5.072l-2.899-22.034L17.348,49.871z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M28.447,18.333l-7.99-6.133
+                C13.173,16.344,8.528,24.32,8.907,33.07l21.115-2.778L28.447,18.333z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M27.307,9.658
+                c-2.461,0.487-4.765,1.354-6.85,2.542l7.99,6.133L27.307,9.658z"/>
+                <path fill="#F6921E" stroke="#FFFFFF" stroke-width="2.2618" stroke-miterlimit="10" d="M36.695,24.661l8.508-11.086
+                c-4.51-3.271-10.215-4.917-16.181-4.196c-0.582,0.072-1.15,0.169-1.715,0.28l1.14,8.674L36.695,24.661z"/>
+                </g>
+                </g>
+                </svg>
+                <p>Лучшая<br /> инновация в контроле знаний</p>
+                </label>
+</fieldset>
+<fieldset class="step2">
+    <legend>Укажите свои контактные данные</legend>
+    <p><label for="id_organization">Организация:</label> <input id="id_organization" maxlength="1024" name="organization" type="text"></p>
+    <p><label for="id_city">Город:</label> <input id="id_city" maxlength="1024" name="city" type="text"></p>
+    <p><label for="id_authors">Авторы:</label> <input id="id_authors" maxlength="1024" name="authors" type="text"></p>
+    <p><label for="id_email">Электронная почта:</label> <input id="id_email" maxlength="1024" name="email" type="email"></p>
+    <p><label for="id_telephone">Контактный телефон:</label> <input id="id_telephone" maxlength="1024" name="telephone" type="text"></p>
+    <p><label for="id_url">Адрес ресурса:</label> <input id="id_url" maxlength="1024" name="url" type="url"></p>
+    <p><label for="id_description">Описание основных идей:</label> <input id="id_description" maxlength="1024" name="description" type="text">  </p>
+    
+</fieldset>
+<fieldset class="step3">
+    <legend>Соглашение с условиями участия</legend>
+    <p><input type="checkbox">Я согласен</p>
+    <input name="submit" id="submit" class="button_create" value="Отправить" type="submit">
+</fieldset>
+</form>
+</div>
 </body>
-<script>
-tinyMCE.init({selector: '#id_description',
+    <script type="text/javascript">tinyMCE.init({selector: '#id_description',
 menubar : false}
 );
-</script>
+
+
+    
+    $("#SignupForm").formToWizard({ submitButton: 'SaveAccount' })
+
+    
+    </script>
 </html>
