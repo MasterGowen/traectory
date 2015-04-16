@@ -1,3 +1,4 @@
+{% load cell_order%}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -5,7 +6,7 @@
     <title></title>
 </head>
 <body>
-
+{{contest_items_ranking}}
 {% for contest_item in contest_items %}
 <article style="background-color:#EEE;">
     <p>{{contest_item.route}}</p>
@@ -17,8 +18,16 @@
     <p>{{contest_item.url}}</p>
     <p>{{contest_item.account}}</p>
     <p>{{contest_item.description}}</p>
-<span style="color:grey;">И тут будут поля под оценки и комментарии экспертов...</span>
+
+    {% for rank in contest_item.rank.all %}
+<p style="color:red;">{{rank.user_rank}}</p>
+<p style="color:grey;">{{rank.user_comment}}</p>
+    {% endfor %}
 </article>
+{% if user.id not in contest_items_ranking|dictkey:contest_item.id %}
+<div style="background-color: rebeccapurple; padding: 1em;">{% include "contest/rank.html" %}</div>
+{% endif %}
+
 {% endfor %}
 
 </body>

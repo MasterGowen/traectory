@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-{{ form.as_ul }}
-</body>
-</html>
+<form action="/contest/{{contest_item.id}}/rank/" method="post">
+{% csrf_token %}
+
+<input type="hidden" value="{{ user.id }}" id="id_user" name="user">
+<p><label for="id_user_rank">Оценка:</label> <input id="id_user_rank" name="user_rank" type="number" /></p>
+<p><label for="id_user_comment">Комментарий:</label> <input id="id_user_comment" maxlength="4096" name="user_comment" type="text" /></p>
+
+<div class="cont-input cont-btn">
+<input name="submit" id="submit" class="button_create" value="Оценить" type="submit">
+</div>
+</form>

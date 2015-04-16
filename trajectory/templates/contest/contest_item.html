@@ -5,5 +5,21 @@
     <title></title>
 </head>
 <body>
+<article style="background-color:#EEE;">
+    <p>{{contest_item.route}}</p>
+    <p>{{contest_item.organization}}</p>
+    <p>{{contest_item.city}}</p>
+    <p>{{contest_item.authors}}</p>
+    <p>{{contest_item.email}}</p>
+    <p>{{contest_item.telephone}}</p>
+    <p>{{contest_item.url}}</p>
+    <p>{{contest_item.account}}</p>
+    <p>{{contest_item.description}}</p>
+
+    {% for rank in contest_item.rank.all %}
+<p style="color:red;">{{rank.user_rank}}</p>
+<p style="color:grey;">{{rank.user_comment}}</p>
+    {% endfor %}
+</article>
 </body>
 </html>

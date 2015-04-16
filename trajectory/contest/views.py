@@ -29,9 +29,16 @@ def create_contest_item(request):
 
 
 def read_contest_item_all(request):
+    contest_items_ranking = {}
     contest_items = ContestItem.objects.all()
+    for contest_item in contest_items:
+        contest_items_ranking[contest_item.id] = []
+        for rank in contest_item.rank.all():
+            contest_items_ranking[contest_item.id].append(rank.user.id)
+
     return render(request, 'contest/contest_list.html', {
-        "contest_items": contest_items
+        "contest_items": contest_items,
+        "contest_items_ranking": contest_items_ranking,
     })
 
 
@@ -59,14 +66,14 @@ def create_contest_item_rank(request, pk):
             contest_item_rank = form.save(commit=False)
             contest_item_rank.save()
 
-            contest_item_rank.user = User.objects.get(pr=request.user.id)
+            contest_item_rank.user = User.objects.get(pk=request.user.id)
             contest_item_rank.save()
 
             contest_item = ContestItem.objects.get(pk=pk)
             contest_item.rank.add(contest_item_rank)
-
-            return redirect('http://notv.urfu.ru/')
+        else:
+            return render(request, '500.html')
     args = {}
     args.update(csrf(request))
     args['form'] = ContestItemRankForm()
-    return render(request, 'contest/rank.html', args)
+    return redirect('/contest/all/')
