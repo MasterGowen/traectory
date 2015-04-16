@@ -20,6 +20,7 @@ class ContestItemForm(forms.ModelForm):
             'email',
             'telephone',
             'url',
+            'account',
             'description',
         ]
 
