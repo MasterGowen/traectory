@@ -2,7 +2,7 @@
 {% csrf_token %}
 
 <input type="hidden" value="{{ user.id }}" id="id_user" name="user">
-<p><label for="id_user_rank">Оценка:</label> <input id="id_user_rank" name="user_rank" type="number" /></p>
+<p><label for="id_user_rank">Оценка:</label> <input id="id_user_rank" name="user_rank" type="number" min=0 max="10"/></p>
 <p><label for="id_user_comment">Комментарий:</label> <input id="id_user_comment" maxlength="4096" name="user_comment" type="text" /></p>
 
 <div class="cont-input cont-btn">
