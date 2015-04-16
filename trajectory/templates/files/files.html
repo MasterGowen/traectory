@@ -61,7 +61,7 @@
 
                 {% for file in files %}
         <div class="file-item">
-            <a class="file-link" href="{{ file.file.url }}">{{ file.name }}</a><p> <span>{{ file.date }}</span></p>
+            <a class="file-link" href="{{ file.file.url }}" download="{{ file.name }}">{{ file.name }}</a><p> <span>{{ file.date }}</span></p>
             <a class="del" href="/notv/delete/{{ file.id }}/{{ user.id }}/"><img src="{% static "images/del.png" %}"></a>
         </div>
         {% endfor %} 
@@ -96,7 +96,7 @@
   <div class="cta cta-welcome">
     <h3 class="gray smaller-header">Шаг первый</h3>
     <p class="justify">
-        Для публикации в электронном сборнике материалов конференции необходимо загрузить на сайт конференции материалы до 15.04.2015г. 
+        Для публикации в электронном сборнике материалов конференции необходимо загрузить на сайт конференции материалы до 20.04.2015г. 
     </p>
   </div>
 
@@ -112,8 +112,8 @@
 
   <div class="cta cta-help">
     <h3 class="gray smaller-header">Нужна помощь?</h3>
-    <p class="justify">Нужна помощь в загрузке файлов? Вы можее написать нам на <a href="mailto:notv@urfu.ru?subject=Нужна помощь в загрузке файлов">электронную почту</a>.</p>
-    <p>Tак же вы можете нам позвонить по  номеру телефона: 8 (343) 374-58-24</p>
+    <p class="justify">Нужна помощь в загрузке файлов? Вы можете написать нам на <a href="mailto:notv@urfu.ru?subject=Нужна помощь в загрузке файлов">электронную почту</a>.</p>
+    <p>Tакже вы можете нам позвонить по  номеру телефона: 8 (343) 374-58-24</p>
   </div>
 
 

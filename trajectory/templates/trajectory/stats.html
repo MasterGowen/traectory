@@ -15,7 +15,7 @@
     background: transparent url("{% static "images/bg.jpg" %}") repeat scroll center 0px;
     }
     .container {
-    width: 950px;
+    width: 1280px;
     margin: 1em auto;
     background-color: white;
     padding: 1em;
@@ -31,6 +31,7 @@
                 <div class="ui top attached tabular menu">
                     <a class="active item" data-tab="users">Пользователи</a>
                     <a class="item" data-tab="events">События</a>
+                    <a class="item" data-tab="tabs">Таблица</a>
                 </div>
                 <div class="ui bottom attached active tab segment" data-tab="users">
                     <div class="ui hidden divider"></div>
@@ -77,7 +78,7 @@
                             </div>
                             <div class="content">
                                 <table class="ui celled striped table">
-                                    <tbody>
+                                    <tbody class="class">
                                         <tr>
                                             <td>
                                                 {{ user.org }}
@@ -97,7 +98,7 @@
                                                         {% if files %}
                                                             {% for file in files %}
                                                                 <div class="ui compact segment">
-                                                                    <h5 class="ui header"><a class="file-link" href="{{ file.file.url }}">{{ file.name }}</a>
+                                                                    <h5 class="ui header"><a class="file-link" href="{{ file.file.url }}" download="{{ file.name }}.docx">{{ file.name }}</a>
                                                                     <div class="sub header">{{ file.date }}</div>
                                                                     </h5>
                                                                     <a class="del" href="http://openedu.urfu.ru/notv/delete/{{ file.id }}/{{ user.id }}/">
@@ -160,17 +161,104 @@
                                     </h4>
                                     <h4 class="ui red header userlen {{ event.id }}" id="online-event-users">
                                         0
-                                    </h4>
+                                    </h4></div><div>
+<table class="ui celled striped table">
+                                    <tbody>
                                     {% for user in users %}
-                                        {{user}}<br />
-                                    {% endfor %}
+
+
+                                        <tr>
+                                            <td>
+                                             {{ user.f }} {{ user.i }} {{ user.o }}
+                                            </td>
+                                            <td>
+                                                {{ user.org }}
+                                            </td>
+                                            <td>
+                                                {{ user.job }}
+                                            </td>
+                                            <td>
+                                                {{ user.email }}
+                                            </td>
+                                            <td>
+                                                {{ user.tel }}
+                                            </td>
+
+
+                                            <td>
+                                                {{ user.get_status_display }}
+                                            </td>
+                                        </tr>
+
+                        {% endfor %}
+                                                            </tbody>
+                                </table>
                                 </div>
                             </div>
                         </div>
                         <div class="ui fitted divider"></div>
                     {% endfor %}
                 </div>
+
             </div>
+                           <div class="ui bottom attached active tab segment" data-tab="tabs">
+                                <div class="content">
+                                <table class="ui celled striped table">
+                                    <tbody>
+                    {% for user in users %}
+
+
+                                        <tr>
+                                            <td>
+                                             {{ user.f }} {{ user.i }} {{ user.o }}
+                                            </td>
+                                            <td>
+                                                {{ user.org }}
+                                            </td>
+                                            <td>
+                                                {{ user.job }}
+                                            </td>
+                                            <td>
+                                                {{ user.email }}
+                                            </td>
+                                            <td>
+                                                {{ user.tel }}
+                                            </td>
+                                            <td>
+                                                {% for user_id, files in userfiles.items %}
+                                                    {% if user_id == user.id %}
+                                                        {% if files %}
+                                                            {% for file in files %}
+                                                                <div class="ui compact segment">
+                                                                    <h5 class="ui header"><a class="file-link" href="{{ file.file.url }}">{{ file.name }}</a>
+                                                                    <div class="sub header">{{ file.date }}</div>
+                                                                    </h5>
+                                                                    <a class="del" href="http://openedu.urfu.ru/notv/delete/{{ file.id }}/{{ user.id }}/">
+                                                                        <div class="ui top right attached mini label">
+                                                                            x
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            Нет файлов
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {{ user.date }}
+                                            </td>
+                                            <td>
+                                                {{ user.get_status_display }}
+                                            </td>
+                                        </tr>
+
+                        {% endfor %}
+                                                            </tbody>
+                                </table>
+                            </div>
+                </div>
 
         </div>
     </div>
@@ -180,12 +268,10 @@ $('.tabular.menu .item').tab();
 $('.ui.accordion').accordion();
 $('td:contains("Очно")').addClass("positive")
 $('td:contains("Заочно")').addClass("negative")
-var onlineUsersCount = $('td:contains("Заочно")').length,
-offlineUsersCount = $('td:contains("Очно")').length;
+var onlineUsersCount = $('.class tr td:contains("Заочно")').length,
+offlineUsersCount = $('.class tr td:contains("Очно")').length;
 $('#online-users').text(onlineUsersCount)
 $('#offline-users').text(offlineUsersCount)
 $('.items .divider').last().remove();
-
-var userStatus = {{ event_users_status_json }}
 </script>
 </html>

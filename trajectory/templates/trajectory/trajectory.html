@@ -30,7 +30,7 @@
 
   <div class="row">
     {% for program in programs %}
-    <h2>По направлению "{{ program.name }}" Вы выбрали следующие мероприятия:</h2>
+    <h2>Вы выбрали следующие мероприятия НОТВ-2015:</h2>
     <p>{{ program.comment }}</p>
 
       {% for cell in cells|sort_by:'step' %}

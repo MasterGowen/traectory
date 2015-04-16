@@ -32,38 +32,41 @@
         <form action="/notv/save/" method="post">
         {% csrf_token %}
             {% for program in programs %}
-                <h2>{{ program.name }}</h2>
+
+                <!--<h2>{{ program.name }}</h2>-->
                 <div>{{ program.comment|safe }}</div>
                 {% for cell in program.cells.all|sort_by:'step' %}
                 
                     <section class="event">      
                         <input type="radio" name="{{ cell.id }}" value="None" id="{{ cell.id }}" checked>
                         <label for="{{ cell.id }}" class="not" >
-                        
-                        
+                        <header>
+                            <p><strong>{{ cell.name }}</strong></p>
+                        </header>
                         {% for event in cell.events.all %}
                             <input type="radio" name="{{ cell.id }}" value="{{ event.id }}" id="{{ event.id }}">
                             <label for="{{ event.id }}" class="ev">
                                 {% if event.image %}
-                                <img src="{{ event.image.url }}" />
+                                    <img style="image-orientation: from-image;" height="119" src="{{ event.image.url }}" />
                                 {% else %}
                                 <img src="http://placehold.it/270x119" />
-
                                 {% endif %}
-                                <article>
+                                <article style="overflow: auto;">
                                     <header>
-                                        <p>{{ event.name }}</p>
+                                        <p><strong>{{ event.name }}</strong></p>
                                     </header>
-                                    <p>{{ event.comment }}</p>
                                     {% localtime on %}
                                         {% if event.startdate %}
-                                            <p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p>
+                                            <!--p>{{ event.startdate|time:"H:i" }} - {{ event.enddate|time:"H:i" }}, {{ event.startdate|date:""}}</p-->
                                         {% endif %}
                                     {% endlocaltime %}
+                                    <p class="comment">{{ event.comment }}</p>
+
                                 </article>
+                                <div class="status"><p></p></div>
                             </label>
                         {% endfor %}
-                        <div><p id="status">Не участвую</p></div>
+                        <div class="status"><p></p></div>
                         </label>
                     </section>
                 
@@ -71,9 +74,11 @@
                 {% empty %}
                     <h3 class="disable">На данный момент нет ни одного мероприятия для формирования траектории</h3>
             {% endfor %}
+            {% if user %}
             <div class="cont-input cont-btn">
                 <input name="submit" id="submit" class="button_submit" value="Сохранить траекторию" type="submit">
             </div>
+            {% endif %}
         </form>
     </div>
 
@@ -92,6 +97,7 @@ else
         $("#{{ active_event }}").prop( "checked", true )
     {% endfor %}
 }
+
 </script>
 
 {% endblock %}

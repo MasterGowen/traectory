@@ -11,13 +11,16 @@ from ..event.models import Event
 from ..files.models import UserFile
 
 
-def trajectory_view(request, pk):
+def trajectory_view(request, pk=None):
     programs = Program.objects.all()
-    trajectory = Trajectory.objects.get(pk=pk)
-    user = User.objects.get(pk=trajectory.user_id)
     active_events = []
-    for event in trajectory.events.all():
-        active_events.append(event.id)
+    user = None
+    if pk != None:
+        trajectory = Trajectory.objects.get(pk=pk)
+        user = User.objects.get(pk=trajectory.user_id)
+
+        for event in trajectory.events.all():
+            active_events.append(event.id)
     return render(request, 'trajectory/program_list.html',
                   {
                       'user': user,
@@ -85,6 +88,8 @@ def stats(request):
         event_users[event] = users
 
         for user in users:
+            if event.id not in event_users_status.keys():
+                event_users_status.update({event.id: []})
             event_users_status[event.id].append(user.status)
         event_users_status_json = json.dumps(event_users_status)
 
